@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/index.js',
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'ToDo App',
+            title: 'Restaurant Homepage',
             template: './src/index.html',
         }),
     ],
@@ -23,6 +23,10 @@ module.exports = {
                 }
             },
             {
+                test: /\.html$/,
+                use: ["html-loader"]
+            },
+            {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
             },
@@ -31,11 +35,4 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-    optimization: {
-        runtimeChunk: 'single',
-        splitChunks: {
-            chunks: 'all',
-        },
-        usedExports: true,
-   },
 };
