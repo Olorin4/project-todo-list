@@ -1,7 +1,7 @@
-import "./normalize.css";
+import './normalize.css';
 import './styles.css';
-import { loadMainContent } from './mainContent';
+import { loadTasks } from './MainContent';
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadMainContent();
+    loadTasks();
 });

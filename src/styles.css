@@ -227,11 +227,11 @@ a h3 {
 }
 
 /* Tab container styles */
-.tab-content {
+.task-list {
     display: none;
 }
 
-.card {
+.task {
     box-shadow: 3px 3px rgb(225, 226, 226);
     border-left: 5px solid #F0B42A;
     border-radius: 5px;
@@ -246,18 +246,22 @@ a h3 {
     margin-right: 8px;
 }
 
-.tabs {
+.projects {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
-.tabs button {
+.projects button {
     margin-right: 8px;
     padding: 8px 16px;
     cursor: pointer;
     background-color: none;
     border-radius: 20px;
     border: none;
+}
+
+.add-project {
+    background-color: none;
 }
