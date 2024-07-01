@@ -21,17 +21,15 @@ class Card {
 
         const links = document.createElement('div');
         links.classList.add('links');
+        card.appendChild(links);
 
         // Use LinkFactory to create the links
         const starLink = IconLinkManager.createStarLink();
         const eyeLink = IconLinkManager.createEyeLink();
         const forkLink = IconLinkManager.createForkLink();
-
         links.appendChild(starLink);
         links.appendChild(eyeLink);
         links.appendChild(forkLink);
-
-        card.appendChild(links);
 
         return card;
     }
