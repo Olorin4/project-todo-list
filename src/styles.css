@@ -221,6 +221,7 @@ a h3 {
 
 /* Tab container styles */
 .task-list {
+.task-list {
     display: none;
 }
 
@@ -239,18 +240,22 @@ a h3 {
     margin-right: 8px;
 }
 
-.tabs {
+.projects {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
-.project {
+.tabs button {
     margin-right: 8px;
     padding: 8px 16px;
     cursor: pointer;
     background-color: none;
     border-radius: 20px;
     border: none;
+}
+
+.add-project {
+    background-color: none;
 }
