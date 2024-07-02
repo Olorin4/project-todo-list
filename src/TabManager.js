@@ -1,35 +1,28 @@
-class TabManager {
+class TabSwitcher {
     constructor() {
-        this.tabs = document.querySelectorAll('.tab');
-        this.addTab = document.querySelector('.add-tab');
-        this.deleteTab = document.querySelector('.delete-tab');
+        this.projectButtons = document.querySelectorAll('.project');
         this.initTabs();
     }
 
     initTabs() {
-        this.tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                const tabId = e.target.dataset.tab;
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.style.display = 'none';
-                });
-                document.getElementById(`tab-${tabId}`).style.display = 'block';
+        this.projectButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const projectId = e.target.dataset.project;
+                this.switchTab(projectId);
             });
         });
 
-        this.addTab.addEventListener('click', this.addNewTab);
-        this.deleteTab.addEventListener('click', this.deleteLastTab);
-
-        document.getElementById('tab-1').style.display = 'block'; // Show the first tab by default
+        // Show the first tab by default
+        this.switchTab('1');
     }
 
-    addNewTab() {
-        // Logic for adding a new tab
-    }
+    switchTab(projectId) {
+        document.querySelectorAll('.task-list').forEach(taskList => {
+            taskList.style.display = 'none';
+        });
 
-    deleteLastTab() {
-        // Logic for deleting the last tab
+        document.getElementById(`tab-${projectId}`).style.display = 'block';
     }
 }
 
-export default TabManager;
+export default TabSwitcher;
