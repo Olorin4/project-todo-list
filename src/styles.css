@@ -74,17 +74,6 @@ header p {
     margin-right: 12px;
 }
 
-button {
-    background-color: #1A92D3;
-    border-radius: 20px;
-    border: none;
-    font-size: 0.7em;
-    font-weight: 600;
-    width: 70px;;
-    height: 30px;
-    margin-left: 12px;
-}
-
 button a,
 .dashboard a {
     color: white;
@@ -240,20 +229,30 @@ a h3 {
     margin-right: 8px;
 }
 
-.projects {
+.project-list {
+    margin-left: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.project-list button {
+    width: 1.5em;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-.tabs button {
-    margin-right: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-    background-color: none;
-    border-radius: 20px;
-    border: none;
+input {
+    background-color: #1A92D3;
+    border-radius: 10px;
+    width: 6.5em;
+    text-align: center;
+    margin-right: 10px;
+    color: #FFFFFF;
 }
 
 .add-project {

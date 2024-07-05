@@ -16,18 +16,6 @@
                 <a href=""><img class="member-avatar-1" src="./assets/member-avatar.svg" alt="an icon representing the user" /></a>
                 <p>Morgan Oakley</p>
             </nav>
-            <nav class="nav-bar-2">
-                <a href=""><img class="member-avatar-2" src="./assets/member-avatar.svg" alt="an icon representing the user" /></a>
-                <div class="user-info">
-                    <p>Hi there, </p>
-                    <h2>Morgan Oakley (@morgan)</h2>
-                </div>
-                <div class="button-container">
-                    <button><a href="">New</a></button>
-                    <button><a href="">Upload</a></button>
-                    <button><a href="">Share</a></button>
-                </div>
-            </nav>
 
         </header>   <!-- END OF NAVBAR    -->
 
@@ -89,34 +77,24 @@
 
         <section class="main-content">
             <div class="project-list">
-                <button class="project" data-project="1">Personal</button>
-                <button class="project" data-project="2">Work</button>
-                <button class="project" data-project="3">Grocery List</button>
-                <button class="add-project"><img src="./assets/add-circle-outline.svg" alt="Add List"></button>
+                <input class="project" data-project="1" type="text" value="Personal">
+                <input class="project" data-project="1" type="text" value="Work">
+                <input class="project" data-project="1" type="text" value="Grocery List">
+                <button class="add-project"><img src="./assets/plus.svg" alt="Add List"></button>
             </div>
             <div class="current-project"></div>
-            <div class="task-list" id="tab-1">
-                <div class="task">
-                    <h4>Task 1A</h4>
+            <div class="task-list-container">
+                <div class="task-list" id="tab-1">
+                    <div class="task"><h4>Task 1A</h4></div>
+                    <div class="task"><h4>Task 1B</h4></div>
                 </div>
-                <div class="task">
-                    <h4>Task 1B</h4>
+                <div class="task-list" id="tab-2">
+                    <div class="task"><h4>Task 2A</h4></div>
+                    <div class="task"><h4>Task 2B</h4></div>
                 </div>
-            </div>
-            <div class="task-list" id="tab-2">
-                <div class="task">
-                    <h4>Task 2A</h4>
-                </div>
-                <div class="task">
-                    <h4>Task 2B</h4>
-                </div>
-            </div>
-            <div class="task-list" id="tab-3">
-                <div class="task">
-                    <h4>Task 3A</h4>
-                </div>
-                <div class="task">
-                    <h4>Task 3B</h4>
+                <div class="task-list" id="tab-3">
+                    <div class="task"><h4>Task 3A</h4></div>
+                    <div class="task"><h4>Task 3B</h4></div>
                 </div>
             </div>
         </section>     <!-- END OF MAIN CONTENT    -->
