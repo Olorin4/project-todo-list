@@ -2,13 +2,12 @@
 import { Project } from "./Project";
 
 class TabSwitcher {
-    switchTab(projectId, projectElements) {
-        const projectArray = Array.from(projectElements);
-        projectArray.forEach(taskList => {
+    switchTab(projectId) {
+        document.querySelectorAll('.task-list').forEach(taskList => {
             taskList.style.display = 'none';
         });
 
-        const targetTab = projectArray.find(tab => tab.id === `tab-${projectId}`);
+        const targetTab = document.getElementById(`tab-${projectId}`);
         if (targetTab) {
             targetTab.style.display = 'block';
         } else {
@@ -19,44 +18,22 @@ class TabSwitcher {
 
 class TabInitializer {
     constructor() {
-        this.projectCount = document.querySelectorAll('.project').length; // Initialize project count based on existing projects
+        this.projectButtons = document.querySelectorAll('.project');
+        this.tabSwitcher = new TabSwitcher();
+        this.initTabs();
     }
 
-    initTabs(projectButtons, projectElements) {
-        const tabSwitcher = new TabSwitcher();
-        projectButtons.forEach(button => {
+    initTabs() {
+        this.projectButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'INPUT') {
-                    const projectId = button.dataset.project;
-                    tabSwitcher.switchTab(projectId, projectElements);
-                }
+                const projectId = e.target.dataset.project;
+                this.tabSwitcher.switchTab(projectId);
             });
-
-            const inputField = button.querySelector('input');
-            if (inputField) {
-                button.addEventListener('dblclick', () => {
-                    inputField.style.display = 'inline';
-                    inputField.focus();
-                    button.textContent = ''; // Clear the button text content
-                });
-
-                inputField.addEventListener('blur', () => {
-                    button.textContent = inputField.value;
-                    inputField.style.display = 'none';
-                });
-
-                inputField.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        button.textContent = inputField.value;
-                        inputField.style.display = 'none';
-                    }
-                });
-            }
         });
 
         // Show the first tab by default
-        tabSwitcher.switchTab('1', projectElements);
+        this.tabSwitcher.switchTab('1');
     }
 }
 
-export default TabInitializer;
+export { TabInitializer, TabSwitcher };

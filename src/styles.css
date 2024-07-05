@@ -234,6 +234,7 @@ a h3 {
     display: flex;
     justify-content: start;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .project-list button {
@@ -246,15 +247,16 @@ a h3 {
     align-items: center;
 }
 
-input {
+.add-project {
+    background-color: none;
+}
+
+.project-input {
     background-color: #1A92D3;
     border-radius: 10px;
     width: 6.5em;
     text-align: center;
-    margin-right: 10px;
+    margin: 5px;
     color: #FFFFFF;
-}
-
-.add-project {
-    background-color: none;
+    cursor: pointer;
 }
