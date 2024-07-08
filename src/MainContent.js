@@ -1,39 +1,17 @@
+// MainContent.js handles DOM interactions of the main-content section.
+
 import { TabInitializer, TabSwitcher } from './TabManager';
 import { Project } from './Project';
 
 let projectCount = 3;
+const projectList = document.querySelector('.project-list');
 
-function loadMainContent() {
-    const projectListContainer = document.querySelector('.project-list');
-
-    // Initial projects data
-    const initialProjects = [
-        new Project(1, 'Personal'),
-        new Project(2, 'Work'),
-        new Project(3, 'Grocery List')
-    ];
-
-    // Create input fields for each initial project
-    initialProjects.forEach(project => {
-        createProjectInput(projectListContainer, project.id, project.name);
-    });
-
-    // Add event listener for the "Add Project" button
-    const addProjectButton = document.querySelector('.add-project');
-    addProjectButton.addEventListener('click', () => {
-        projectCount++;
-        const newProject = new Project(projectCount, `Project ${projectCount}`);
-        createProjectInput(projectListContainer, newProject.id, newProject.name);
-    });
-
-    new TabInitializer();
-}
 
 function createProjectInput(container, id, name) {
     const projectInput = document.createElement('input');
     projectInput.type = 'text';
     projectInput.value = name;
-    projectInput.classList.add('project-input');
+    projectInput.classList.add('project');
     projectInput.dataset.project = id;
     projectInput.readOnly = true; // Make input read-only by default
 
@@ -64,6 +42,40 @@ function createProjectInput(container, id, name) {
     taskList.classList.add('task-list');
     taskList.id = `tab-${id}`;
     taskListContainer.appendChild(taskList);
+}
+
+
+class DefaultProjectLoader {
+    constructor(container) {
+        this.container = container;
+        this.load();
+    }
+
+    load() {
+        const defaultProjects = [
+            new Project(1, 'Personal'),
+            new Project(2, 'Work'),
+            new Project(3, 'Grocery List')
+        ];
+
+        // Create input fields for each default project
+        defaultProjects.forEach(project => {
+            createProjectInput(this.container, project.id, project.name);
+        });
+    }
+}
+
+function loadMainContent() {
+    new DefaultProjectLoader(projectList);
+    new TabInitializer();
+
+    // Add event listener for the "Add Project" button
+    const addProjectButton = document.querySelector('.add-project');
+    addProjectButton.addEventListener('click', () => {
+        projectCount++;
+        const newProject = new Project(projectCount, `Project ${projectCount}`);
+        createProjectInput(projectList, newProject.id, newProject.name);
+    });
 }
 
 export { loadMainContent };

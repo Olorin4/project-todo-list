@@ -12,6 +12,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Make inputs editable on double click.
-// - Add delete project button, visible only when input is hovered
-// - Add task button with input field.
+// - Add "delete project" button, visible only when input is hovered
+// - Add "create task" button with input field.

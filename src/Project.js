@@ -1,3 +1,5 @@
+// Project.js establishes basic objects.
+
 class Project {
     constructor(id, name) {
         this.id = id;
