@@ -1,6 +1,6 @@
 // TabManager.js handles tab management (initialization and switching).
 
-import { Project } from "./Project";
+import { Project } from "./Objects";
 
 class TabSwitcher {
     switchTab(projectId) {

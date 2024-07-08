@@ -1,7 +1,7 @@
 // MainContent.js handles DOM interactions of the main-content section.
 
 import { TabInitializer, TabSwitcher } from './TabManager';
-import { Project } from './Project';
+import { Project } from './Objects';
 
 let projectCount = 3;
 const projectList = document.querySelector('.project-list');

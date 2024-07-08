@@ -1,6 +1,6 @@
 body {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr 1.1fr;
     grid-template-rows: 80px 805px;
 }
 
@@ -76,6 +76,7 @@ button a,
     color: white;
     grid-column: 1;
     grid-row: 1 / span 2;
+    height: 98.9%;
 }
 
 #dashboard-title {
@@ -105,6 +106,7 @@ button a,
     justify-content: baseline;
     align-items: center;
 }
+
 .menu-item img {
     width: 16px;
     height: 16px;
@@ -121,10 +123,26 @@ a h3 {
 
 .right-sidebar {
     background-color: #E2E8F0;
+    margin: 10px;
     padding-right: 15px;
     grid-column: 3;
-
     display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.right-sidebar > h4 {
+    font-weight: 600;
+}
+
+.upcoming {
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px rgb(225, 226, 226);
+    border-radius: 5px;
+    margin-left: 14px;
+    height: 60%;
+    display:flex;
     flex-direction: column;
 }
 
@@ -134,26 +152,10 @@ a h3 {
     letter-spacing: -0.05ch;
 }
 
-.upcoming {
-    background-color: #FFFFFF;
-    box-shadow: 3px 3px rgb(225, 226, 226);
-    padding: 15px;
-    border-radius: 5px;
-    height: 50%;
-    display:flex;
-    flex-direction: column;
-}
-
-.right-sidebar > h4 {
-    margin: 25px 0 10px;
-    font-weight: 600;
-}
-
 .upcoming div {
     padding: 10px;
     font-size: 0.7em;
     border-bottom: 2px solid rgb(190, 188, 188);
-    
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -164,28 +166,74 @@ a h3 {
 
 .main-content {
     background-color: #E2E8F0;
+    margin: 10px;
     grid-column: 2;
     grid-row: 2;
     padding-top: 15px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 2.6fr 1fr;
+    gap: 10px;
 }
 
-.task p {
+/* .task p {
     font-size: 0.8em;
-}
+} */
 
-.links {
+/* .links {
     padding-top: 15px;
     display: flex;
     justify-content: flex-end;
-}
+} */
 
-.links img {
+/* .links img {
     height: 20px;
     width: 20px;
     margin: 0 10px;
+} */
+
+/* .links a {
+    margin-right: 8px;
+} */
+
+.project-list {
+    grid-row: 1;
+    margin-left: 10px;
+    align-self: baseline;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.current-project {
+    grid-row: 2;
+}
+
+.project-list button,
+.new-task button {
+    width: 1.5em;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project {
+    background-color: #1A92D3;
+    border-radius: 10px;
+    width: 6.5em;
+    text-align: center;
+    margin: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
 }
 
 /* Tab container styles */
+.task-list-container {
+    grid-row: 3;
+}
 
 .task-list {
     display: none;
@@ -202,38 +250,17 @@ a h3 {
     margin: 8px;
 }
 
-.links a {
-    margin-right: 8px;
-}
-
-.project-list {
-    margin-left: 10px;
+.new-task {
+    grid-row: 4;
     display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.project-list button {
-    width: 1.5em;
-    cursor: pointer;
-    background-color: #1A92D3;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.add-project {
-    background-color: none;
+.add-task {
+    margin: 10px;
 }
 
-.project {
-    background-color: #1A92D3;
-    border-radius: 10px;
-    width: 6.5em;
-    text-align: center;
-    margin: 5px;
-    color: #FFFFFF;
-    cursor: pointer;
+.task-title {
+    width: 65%;
 }
