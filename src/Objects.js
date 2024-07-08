@@ -1,4 +1,4 @@
-// Project.js establishes basic objects.
+// Project.js establishes main objects.
 
 class Project {
     constructor(id, name) {
@@ -16,7 +16,7 @@ class Task {
     constructor(title, description) {
         this.title = title;
         this.description = description;
-        this.completed = false; // Default state is incomplete
+        this.completed = false; // Default state is "incomplete"
     }
 
     complete() {
@@ -28,4 +28,4 @@ class Task {
     }
 }
 
-export { Project };
+export { Project, Task };
