@@ -1,24 +1,32 @@
 // MainContent.js handles DOM interactions of the main-content section.
 
 import { TabInitializer, TabSwitcher } from './TabManager';
-import { Project } from './Objects';
+import { Project, Task } from './Objects';
 
 let projectCount = 3;
-const projectList = document.querySelector('.project-list');
+let taskCount = 0;
+const tabSwitcher = new TabSwitcher();
+const projects = {}; // Store projects
 
+function createProject(id, title) {
+    const projectList = document.querySelector('.project-list');
 
-function createProject(id, name) {
-    // Create input filed for a project:
+    // Create input field for a project:
     const projectInput = document.createElement('input');
     projectInput.type = 'text';
-    projectInput.value = name;
+    projectInput.value = title;
     projectInput.classList.add('project');
     projectInput.dataset.project = id;
     projectInput.readOnly = true; // Make input read-only by default
 
     // Event listener for switching tabs:
     projectInput.addEventListener('click', () => {
-        const tabSwitcher = new TabSwitcher();
+        // Remove current-project class from all projects
+        document.querySelectorAll('.project').forEach(proj => {
+            proj.classList.remove('current-project');
+        });
+        // Add current-project class to the clicked project
+        projectInput.classList.add('current-project');
         tabSwitcher.switchTab(id);
     });
 
@@ -43,8 +51,10 @@ function createProject(id, name) {
     taskList.classList.add('task-list');
     taskList.id = `tab-${id}`;
     taskListContainer.appendChild(taskList);
-}
 
+    // Add project to the projects object
+    projects[id] = new Project(id, title);
+}
 
 class DefaultProjectLoader {
     constructor() {
@@ -60,43 +70,63 @@ class DefaultProjectLoader {
 
         // Create input fields for each default project:
         defaultProjects.forEach(project => {
-            createProject(project.id, project.name);
+            createProject(project.id, project.title);
         });
+
+        // Show the first project by default and set it as active
+        document.querySelector('.project').classList.add('current-project');
+        tabSwitcher.switchTab('1');
     }
 }
 
+function createTask(projectId, taskTitle) {
+    const currentProject = projects[projectId];
+    taskCount++;
+    const newTask = new Task(taskCount, taskTitle);
+    currentProject.addTask(newTask);
 
-class TaskManager {
-    constructor() {
-        this.loadLinks();
-    }
-
-    loadLinks() {
-
-    }
-
-
+    // Update the DOM to display the new task
+    const taskList = document.getElementById(`tab-${projectId}`);
+    const taskCard = document.createElement('div');
+    taskCard.classList.add('task-card'); // Renamed to taskCard
+    taskCard.textContent = taskTitle;
+    taskList.appendChild(taskCard);
 }
-
-
-class createTask {
-    constructor(title, id) {
-        this.title = title;
-        this.id = id;
-    }
-}
-
 
 function loadMainContent() {
-    new DefaultProjectLoader();
     new TabInitializer();
+    new DefaultProjectLoader();
 
     // Add event listener for the "Add Project" button:
     const addProjectButton = document.querySelector('.add-project');
     addProjectButton.addEventListener('click', () => {
         projectCount++;
         const newProject = new Project(projectCount, `Project ${projectCount}`);
-        createProject(newProject.id, newProject.name);
+        createProject(newProject.id, newProject.title);
+
+        // Set the newly added project as active
+        document.querySelectorAll('.project').forEach(proj => {
+            proj.classList.remove('current-project');
+        });
+        document.querySelector(`.project[data-project="${newProject.id}"]`).classList.add('current-project');
+    });
+
+    // Add event listener for the "Add new Task" input field:
+    const taskTitleInput = document.querySelector('.task-title');
+    taskTitleInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const taskTitle = taskTitleInput.value.trim();
+            if (taskTitle) {
+                const activeProjectElement = document.querySelector('.project.current-project');
+                if (activeProjectElement) {
+                    const currentProjectId = activeProjectElement.dataset.project;
+                    createTask(currentProjectId, taskTitle);
+                    taskTitleInput.value = ''; // Clear the input field after adding the task
+                } else {
+                    console.error("No active project found");
+                }
+            }
+        }
     });
 }
 

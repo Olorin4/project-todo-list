@@ -31,9 +31,6 @@ class TabInitializer {
                 this.tabSwitcher.switchTab(projectId);
             });
         });
-
-        // Show the first tab by default
-        this.tabSwitcher.switchTab('1');
     }
 }
 

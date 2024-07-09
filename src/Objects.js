@@ -1,9 +1,9 @@
 // Project.js establishes main objects.
 
 class Project {
-    constructor(id, name) {
+    constructor(id, title) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.tasks = [];
     }
 
@@ -13,9 +13,9 @@ class Project {
 }
 
 class Task {
-    constructor(title, description) {
+    constructor(id, title) {
+        this.id = id;
         this.title = title;
-        this.description = description;
         this.completed = false; // Default state is "incomplete"
     }
 
