@@ -16,16 +16,25 @@ class Task {
     constructor(id, title) {
         this.id = id;
         this.title = title;
-        this.completed = false; // Default state is "incomplete"
+        this.completed = false;
+        this.important = false;
     }
 
     complete() {
         this.completed = true;
     }
-
     incomplete() {
         this.completed = false;
     }
+
+    important() {
+        this.important = true;
+    }
+    unimportant() {
+        this.important = false;
+    }
 }
 
-export { Project, Task };
+const projects = {}; // Centralized storage for projects
+
+export { Project, Task, projects };

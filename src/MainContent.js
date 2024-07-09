@@ -1,49 +1,28 @@
 // MainContent.js handles DOM interactions of the main-content section.
 
 import { TabInitializer, TabSwitcher } from './TabManager';
-import { Project, Task } from './Objects';
+import { Project, Task, projects } from './Objects';
 
 let projectCount = 3;
 let taskCount = 0;
 const tabSwitcher = new TabSwitcher();
-const projects = {}; // Store projects
+
 
 function createProject(id, title) {
     const projectList = document.querySelector('.project-list');
 
     // Create input field for a project:
-    const projectInput = document.createElement('input');
-    projectInput.type = 'text';
-    projectInput.value = title;
-    projectInput.classList.add('project');
-    projectInput.dataset.project = id;
-    projectInput.readOnly = true; // Make input read-only by default
+    const projectTitle = document.createElement('input');
+    projectTitle.type = 'text';
+    projectTitle.value = title;
+    projectTitle.classList.add('project');
+    projectTitle.dataset.project = id;
+    projectTitle.readOnly = true;
 
-    // Event listener for switching tabs:
-    projectInput.addEventListener('click', () => {
-        // Remove current-project class from all projects
-        document.querySelectorAll('.project').forEach(proj => {
-            proj.classList.remove('current-project');
-        });
-        // Add current-project class to the clicked project
-        projectInput.classList.add('current-project');
-        tabSwitcher.switchTab(id);
-    });
+    makeCurrentProject(id, projectTitle);
+    renameProject(projectTitle);
 
-    // Event listener for double-click to make input editable:
-    projectInput.addEventListener('dblclick', () => {
-        projectInput.readOnly = false;
-        projectInput.classList.add('editable');
-        projectInput.focus(); // Focus the input field for immediate editing
-    });
-
-    // Event listener for blur to make input read-only again:
-    projectInput.addEventListener('blur', () => {
-        projectInput.readOnly = true;
-        projectInput.classList.remove('editable');
-    });
-
-    projectList.appendChild(projectInput);
+    projectList.appendChild(projectTitle);
 
     // Create a corresponding task list container:
     const taskListContainer = document.querySelector('.task-list-container');
@@ -54,6 +33,43 @@ function createProject(id, title) {
 
     // Add project to the projects object
     projects[id] = new Project(id, title);
+}
+
+function renameProject(projectTitle) {
+    // Event listener for double-click to make input editable:
+    projectTitle.addEventListener('dblclick', () => {
+        projectTitle.readOnly = false;
+        projectTitle.classList.add('editable');
+        projectTitle.focus(); // Focus the input field for immediate editing
+    });
+
+    // Event listener for blur to make input read-only again:
+    projectTitle.addEventListener('blur', () => {
+        projectTitle.readOnly = true;
+        projectTitle.classList.remove('editable');
+    });
+}
+
+function makeCurrentProject(id, projectTitle) {
+    // Event listener for switching tabs:
+    projectTitle.addEventListener('click', () => {
+        // Remove current-project class from all projects
+        document.querySelectorAll('.project').forEach(proj => {
+            proj.classList.remove('current-project');
+        });
+        // Add current-project class to the clicked project
+        projectTitle.classList.add('current-project');
+        tabSwitcher.switchTab(id);
+    });
+}
+
+function setupAddProjectListener() {
+    const addProjectButton = document.querySelector('.add-project');
+    addProjectButton.addEventListener('click', () => {
+        projectCount++;
+        const newProject = new Project(projectCount, `Project ${projectCount}`);
+        createProject(newProject.id, newProject.title);
+    });
 }
 
 class DefaultProjectLoader {
@@ -93,25 +109,7 @@ function createTask(projectId, taskTitle) {
     taskList.appendChild(taskCard);
 }
 
-function loadMainContent() {
-    new TabInitializer();
-    new DefaultProjectLoader();
-
-    // Add event listener for the "Add Project" button:
-    const addProjectButton = document.querySelector('.add-project');
-    addProjectButton.addEventListener('click', () => {
-        projectCount++;
-        const newProject = new Project(projectCount, `Project ${projectCount}`);
-        createProject(newProject.id, newProject.title);
-
-        // Set the newly added project as active
-        document.querySelectorAll('.project').forEach(proj => {
-            proj.classList.remove('current-project');
-        });
-        document.querySelector(`.project[data-project="${newProject.id}"]`).classList.add('current-project');
-    });
-
-    // Add event listener for the "Add new Task" input field:
+function setupAddTaskListener() {
     const taskTitleInput = document.querySelector('.task-title');
     taskTitleInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
@@ -119,9 +117,7 @@ function loadMainContent() {
             if (taskTitle) {
                 const activeProjectElement = document.querySelector('.project.current-project');
                 if (activeProjectElement) {
-                    const currentProjectId = activeProjectElement.dataset.project;
-                    createTask(currentProjectId, taskTitle);
-                    taskTitleInput.value = ''; // Clear the input field after adding the task
+                     // Clear the input field after adding the task
                 } else {
                     console.error("No active project found");
                 }
@@ -129,5 +125,13 @@ function loadMainContent() {
         }
     });
 }
+
+function loadMainContent() {
+    new DefaultProjectLoader();
+    new TabInitializer();
+    setupAddProjectListener();
+    setupAddTaskListener();
+}
+
 
 export { loadMainContent };

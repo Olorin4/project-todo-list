@@ -3,7 +3,7 @@
 import { Project } from "./Objects";
 
 class TabSwitcher {
-    switchTab(projectId) {
+    switchTab(projectId, projectTitle) {
         document.querySelectorAll('.task-list').forEach(taskList => {
             taskList.style.display = 'none';
         });
