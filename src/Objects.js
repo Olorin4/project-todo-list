@@ -1,13 +1,30 @@
 // Objects.js establishes main objects.
 
-const projects = {}; // Centralized storage for projects
+class ProjectList {
+    constructor() {
+        this.projects = [];    // Array to hold Project instances
+    }
+
+    addProject(project) {
+        this.projects.push(project);
+    }
+
+    removeProject(id) {
+        this.projects = this.projects.filter(project => project.id !== id);
+    }
+
+    getProjectById(id) {
+        return this.projects.find(project => project.id === id);
+    }
+}
+
 
 class Project {
     constructor(id, title) {
         this.id = id;
         this.title = title;
         this.isCurrent = false;
-        this.taskList = [];
+        this.taskList = [];    // Array to hold Task instances
     }
 
     setCurrent() {
@@ -19,6 +36,14 @@ class Project {
 
     addTask(task) {
         this.taskList.push(task);
+    }
+
+    removeTask(id) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+    }
+
+    getTaskById(id) {
+        return this.tasks.find(task => task.id === id);
     }
 }
 
@@ -46,4 +71,5 @@ class Task {
     }
 }
 
-export { Project, Task, projects };
+
+export { ProjectList, Project, Task };
