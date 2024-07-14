@@ -11,6 +11,11 @@ class ProjectList {
 
     removeProject(id) {
         this.projects = this.projects.filter(project => project.id !== id);
+
+        // After removing, update the IDs of remaining projects
+        this.projects.forEach((project, index) => {
+            project.id = index + 1;
+        });
     }
 
     getProjectById(id) {
@@ -42,6 +47,10 @@ class Project {
 
     removeTask(id) {
         this.taskList = this.taskList.filter(task => task.id !== id);
+        // After removing, update the IDs of remaining tasks
+        this.taskList.forEach((task, index) => {
+            task.id = index + 1;
+        });
     }
 
     getTaskById(id) {
@@ -51,11 +60,13 @@ class Project {
 
 
 class Task {
-    constructor(taskId, title, projectId) {
+    constructor(taskId, title, projectId, dueDate = null) {
         this.id = taskId;
         this.title = title;
         this.isCompleted = false;
         this.isImportant = false;
+        this.dueDate = dueDate; 
+        this.projectId = projectId;
     }
 
     complete() {
@@ -70,6 +81,13 @@ class Task {
     }
     unimportant() {
         this.isImportant = false;
+    }
+
+    getDueDate() {
+        return this.dueDate;
+    }
+    setDueDate(newDueDate) {
+        this.dueDate = newDueDate;
     }
 }
 

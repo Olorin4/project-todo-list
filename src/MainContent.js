@@ -10,6 +10,8 @@ import { createTask, removeTask } from "./TaskManager";
 function loadMainContent() {
     loadDefaults();
     console.log("Main content loaded with defaults");
+
+    // Debugging:
     createTask('Laundry', 1);
     createTask('Shopping', 1);
     createTask('water the vineyard', 2);
@@ -18,7 +20,9 @@ function loadMainContent() {
     setCurrentProject(2);
     logProjectList();
     removeTask(1, 1);
-    removeProject(4)
+    removeProject(2)
+    logProjectList();
+    removeProject(1)
     logProjectList();
 }
 

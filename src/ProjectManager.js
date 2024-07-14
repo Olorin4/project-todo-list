@@ -51,6 +51,7 @@ function createProject(title) {
 
 function removeProject(id) {
     const projectToRemove = projectList.getProjectById(id);
+    const wasCurrent = projectToRemove.isCurrent;
 
     if (!projectToRemove) {
         console.error(`Project with ID ${id} not found.`);
@@ -59,10 +60,14 @@ function removeProject(id) {
 
     // Remove the project from projectList
     projectList.removeProject(id);
-
+    
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
-}
 
+    if (wasCurrent) {
+            setCurrentProject(id);
+    } 
+}
+    
 
 // Function to log projectList and its contents
 function logProjectList() {
