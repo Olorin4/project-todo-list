@@ -1,5 +1,7 @@
 // Objects.js establishes main objects.
 
+const projects = {}; // Centralized storage for projects
+
 class Project {
     constructor(id, title) {
         this.id = id;
@@ -11,7 +13,6 @@ class Project {
     setCurrent() {
         this.isCurrent = true;
     }
-
     unsetCurrent() {
         this.isCurrent = false;
     }
@@ -44,8 +45,5 @@ class Task {
         this.isImportant = false;
     }
 }
-
-
-const projects = {}; // Centralized storage for projects
 
 export { Project, Task, projects };

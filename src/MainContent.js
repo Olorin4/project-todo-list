@@ -1,11 +1,10 @@
 // MainContent.js handles DOM interactions of the main-content section.
 
-import { TabInitializer, TabSwitcher } from './TabManager';
+import { initializeTabs, switchTab } from './TabManager';
 import { Project, Task, projects } from './Objects';
 
 let projectCount = 3;
 let taskCount = 0;
-const tabSwitcher = new TabSwitcher();
 
 function renderProject(id, title) {
     const projectList = document.querySelector('.project-list');
@@ -34,10 +33,18 @@ function renderProject(id, title) {
     projects[id] = new Project(id, title);
 
     // Make the newly created project the current project
-    setCurrentProject(id, projectTitle);
+    projectTitle.click();
+
+    // Reinitialize tab switching
+    initializeTabs();
 }
 
-function renameProject(projectTitle) {
+function setupProjectEvents(id, projectTitle) {
+    // Set up event listener for switching tabs:
+    projectTitle.addEventListener('click', () => {
+        setCurrentProject(id, projectTitle);
+    });
+
     // Event listener for double-click to make input editable:
     projectTitle.addEventListener('dblclick', () => {
         projectTitle.readOnly = false;
@@ -76,26 +83,7 @@ function setCurrentProject(id, projectTitle) {
 
     // Add current-project class to the specified project element
     projectTitle.classList.add('current-project');
-    tabSwitcher.switchTab(id);
-}
-
-function setupProjectEvents(id, projectTitle) {
-    // Event listener for switching tabs:
-    projectTitle.addEventListener('click', () => {
-        setCurrentProject(id, projectTitle);
-    });
-
-    // Rename project setup
-    renameProject(projectTitle);
-}
-
-function setupAddProjectListener() {
-    const addProjectButton = document.querySelector('.add-project');
-    addProjectButton.addEventListener('click', () => {
-        projectCount++;
-        const newProject = new Project(projectCount, `Project ${projectCount}`);
-        renderProject(newProject.id, newProject.title);
-    });
+    switchTab(id);
 }
 
 function loadDefaults() {
@@ -105,15 +93,15 @@ function loadDefaults() {
         new Project(3, 'Grocery List')
     ];
 
-    // Create input fields for each default project:
+    // Render input fields for each default project:
     defaultProjects.forEach(project => {
         renderProject(project.id, project.title);
     });
 
-    // Show the first project by default and set it as current
+    // Show the first project by default and set it as active
     const firstProject = defaultProjects[0];
     const firstProjectElement = document.querySelector(`.project[data-project="${firstProject.id}"]`);
-    setCurrentProject(firstProject.id, firstProjectElement);
+    firstProjectElement.click();
 }
 
 function createTask(projectId, taskTitle) {
@@ -125,7 +113,7 @@ function createTask(projectId, taskTitle) {
     // Update the DOM to display the new task
     const taskList = document.getElementById(`tab-${projectId}`);
     const taskCard = document.createElement('div');
-    taskCard.classList.add('task-card'); // Renamed to taskCard
+    taskCard.classList.add('task-card');
     taskCard.textContent = taskTitle;
     taskList.appendChild(taskCard);
 }
@@ -151,9 +139,14 @@ function setupAddTaskListener() {
 
 function loadMainContent() {
     loadDefaults();
-    new TabInitializer();
-    setupAddProjectListener();
+    initializeTabs();
     setupAddTaskListener();
 }
+
+document.querySelector('.add-project').addEventListener('click', () => {
+    projectCount++;
+    const newProject = new Project(projectCount, `Project ${projectCount}`);
+    renderProject(newProject.id, newProject.title);
+});
 
 export { loadMainContent };
