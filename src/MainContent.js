@@ -1,6 +1,6 @@
 // MainContent.js handles DOM interactions of the main-content section.
 
-import { initializeTabs, switchTab } from './TabManager';
+import { initializeTabs, switchTab, setCurrentProject } from './TabManager';
 import { Project, Task, projects } from './Objects';
 
 let projectCount = 3;
@@ -22,7 +22,7 @@ function renderProject(id, title) {
 
     projectList.appendChild(projectTitle);
 
-    // Create a corresponding task list container:
+    // Create a corresponding task list:
     const taskListContainer = document.querySelector('.task-list-container');
     const taskList = document.createElement('div');
     taskList.classList.add('task-list');
@@ -33,7 +33,7 @@ function renderProject(id, title) {
     projects[id] = new Project(id, title);
 
     // Make the newly created project the current project
-    projectTitle.click();
+    setCurrentProject(id, projectTitle);
 
     // Reinitialize tab switching
     initializeTabs();
@@ -67,24 +67,6 @@ function setupProjectEvents(id, projectTitle) {
     });
 }
 
-function setCurrentProject(id, projectTitle) {
-    // Unset current-project status for all projects in the projects object
-    Object.values(projects).forEach(proj => {
-        proj.unsetCurrent();
-    });
-
-    // Set current-project status for the specified project
-    projects[id].setCurrent();
-
-    // Remove current-project class from all project elements
-    document.querySelectorAll('.project').forEach(proj => {
-        proj.classList.remove('current-project');
-    });
-
-    // Add current-project class to the specified project element
-    projectTitle.classList.add('current-project');
-    switchTab(id);
-}
 
 function loadDefaults() {
     const defaultProjects = [
