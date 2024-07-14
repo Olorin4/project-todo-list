@@ -1,10 +1,9 @@
-// ProjectManager.js handles tab management (initialization and switching).
-
 import { ProjectList, Project } from "./Objects";
 
 const projectList = new ProjectList();
 
 function loadDefaults() {
+    console.log("Creating projects...");
     const defaultProjects = [
         new Project(1, "Personal"),
         new Project(2, "Work"),
@@ -13,12 +12,10 @@ function loadDefaults() {
 
     console.log("Default projects created:", defaultProjects);
 
-    // Add default projects to the projects object
+    // Add default projects to the projectList object
     defaultProjects.forEach(project => {
         projectList.addProject(project);
     });
-
-    console.log("Projects after adding defaults:", projectList.projects);
 
     // Set the first project as current by default
     setCurrentProject(defaultProjects[0].id);
@@ -28,7 +25,7 @@ function loadDefaults() {
 function setCurrentProject(id) {
     console.log(`Setting project ${id} as current`);
 
-    // Unset current-project status for all projects in the projects object
+    // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
         proj.unsetCurrent();
     });
@@ -40,7 +37,10 @@ function setCurrentProject(id) {
 }
 
 
-function createProject(id, title) {
+function createProject(title) {
+    // Calculate the ID based on the current number of projects in projectList
+    const id = projectList.projects.length + 1;
+
     // Create a new project instance
     const newProject = new Project(id, title);
     
@@ -50,5 +50,9 @@ function createProject(id, title) {
     setCurrentProject(id);
 }
 
+// Function to log projectList and its contents
+function logProjectList() {
+    console.log("Project List:", projectList.projects);
+}
 
-export { loadDefaults, setCurrentProject, createProject };
+export { projectList, loadDefaults, setCurrentProject, createProject, logProjectList };

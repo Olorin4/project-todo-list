@@ -39,18 +39,18 @@ class Project {
     }
 
     removeTask(id) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.taskList = this.taskList.filter(task => task.id !== id);
     }
 
     getTaskById(id) {
-        return this.tasks.find(task => task.id === id);
+        return this.taskList.find(task => task.id === id);
     }
 }
 
 
 class Task {
-    constructor(id, title) {
-        this.id = id;
+    constructor(taskId, title, projectId) {
+        this.id = `${projectId}${taskId}`;
         this.title = title;
         this.isCompleted = false;
         this.isImportant = false;

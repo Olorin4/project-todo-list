@@ -1,6 +1,6 @@
 import "./normalize.css";
-import './styles.css';
-import { loadMainContent } from './MainContent';
+import "./styles.css";
+import { loadMainContent } from "./MainContent";
 
 document.addEventListener('DOMContentLoaded', () => {
     loadMainContent();
@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - ***** Fix new Project not being made visible *****
 // - Add "completed", "delete task" and "important" buttons to the task card.
 // - Add "delete project" button, visible only when project is hovered
 // - Move "add project" button to the end of the project-list div.
