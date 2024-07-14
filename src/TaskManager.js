@@ -1,5 +1,6 @@
 import { projectList, Project, Task } from "./Objects";
 
+
 function createTask(title, projectId) {
     const project = projectList.getProjectById(projectId);
 
@@ -20,5 +21,18 @@ function createTask(title, projectId) {
     console.log(`Task created: ${newTask.title} (ID: ${newTask.id})`);
 }
 
+function removeTask(taskId, projectId) {
+    const project = projectList.getProjectById(projectId);
 
-export { createTask };
+    if (!project) {
+        console.error(`Project with ID ${projectId} not found.`);
+        return;
+    }
+
+    // Remove task from the project's taskList
+    project.removeTask(taskId);
+
+    console.log(`Task removed: ID ${taskId} from project ${projectId}`);
+}
+
+export { createTask, removeTask };

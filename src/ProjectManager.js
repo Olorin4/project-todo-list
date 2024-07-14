@@ -1,4 +1,4 @@
-import { projectList, ProjectList, Project } from "./Objects";
+import { projectList, Project } from "./Objects";
 
 function loadDefaults() {
     console.log("Creating projects...");
@@ -48,9 +48,28 @@ function createProject(title) {
     setCurrentProject(id);
 }
 
+
+function removeProject(id) {
+    const projectToRemove = projectList.getProjectById(id);
+
+    if (!projectToRemove) {
+        console.error(`Project with ID ${id} not found.`);
+        return;
+    }
+
+    // Remove the project from projectList
+    projectList.removeProject(id);
+
+    console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
+}
+
+
 // Function to log projectList and its contents
 function logProjectList() {
     console.log("Project List:", projectList.projects);
 }
 
-export { projectList, loadDefaults, setCurrentProject, createProject, logProjectList };
+export {
+    projectList, loadDefaults, setCurrentProject,
+    createProject, removeProject, logProjectList
+};

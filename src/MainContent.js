@@ -1,7 +1,10 @@
 // MainContent.js handles all DOM interactions of the main-content section.
 
-import { projectList, loadDefaults, setCurrentProject, createProject, logProjectList } from "./ProjectManager";
-import { createTask } from "./TaskManager";
+import {
+    projectList, loadDefaults, setCurrentProject,
+    createProject, removeProject, logProjectList
+} from "./ProjectManager";
+import { createTask, removeTask } from "./TaskManager";
 
 
 function loadMainContent() {
@@ -13,6 +16,9 @@ function loadMainContent() {
     createProject('Farming');
     logProjectList();
     setCurrentProject(2);
+    logProjectList();
+    removeTask(1, 1);
+    removeProject(4)
     logProjectList();
 }
 
