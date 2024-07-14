@@ -3,7 +3,7 @@
 import { projectList, Project, Task } from "./Objects";
 
 
-function createTask(title, projectId) {
+function createTask(description, projectId) {
     const project = projectList.getProjectById(projectId);
 
     if (!project) {
@@ -15,26 +15,25 @@ function createTask(title, projectId) {
     const taskId = project.taskList.length + 1;
 
     // Create a new task instance
-    const newTask = new Task(taskId, title, projectId);
-
-    // Add the task to the project's taskList
+    const newTask = new Task(taskId, description, projectId);
     project.addTask(newTask);
 
-    console.log(`Task created: ${newTask.title} (ID: ${newTask.id})`);
+    console.log(`Task created: ${newTask.description} (ID: ${newTask.id})`);
 }
+
 
 function removeTask(taskId, projectId) {
     const project = projectList.getProjectById(projectId);
-
-    if (!project) {
-        console.error(`Project with ID ${projectId} not found.`);
-        return;
-    }
-
-    // Remove task from the project's taskList
     project.removeTask(taskId);
-
+    
     console.log(`Task removed: ID ${taskId} from project ${projectId}`);
 }
+
+
+function markAsCompleted() {
+
+}
+
+
 
 export { createTask, removeTask };

@@ -22,8 +22,6 @@ function loadMainContent() {
     removeTask(1, 1);
     removeProject(2)
     logProjectList();
-    removeProject(1)
-    logProjectList();
 }
 
 

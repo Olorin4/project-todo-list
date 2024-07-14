@@ -33,3 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Optional: Move Project list to the Dashboard.
 // - Create a Support page with a contact form.
 // - Create rudimentary Privacy agreement.
+// - Create Footer.

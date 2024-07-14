@@ -64,7 +64,7 @@ function removeProject(id) {
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
     if (wasCurrent) {
-            setCurrentProject(id);
+        setCurrentProject(id);
     } 
 }
     

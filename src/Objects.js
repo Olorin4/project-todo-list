@@ -11,7 +11,6 @@ class ProjectList {
 
     removeProject(id) {
         this.projects = this.projects.filter(project => project.id !== id);
-
         // After removing, update the IDs of remaining projects
         this.projects.forEach((project, index) => {
             project.id = index + 1;
@@ -44,7 +43,6 @@ class Project {
     addTask(task) {
         this.taskList.push(task);
     }
-
     removeTask(id) {
         this.taskList = this.taskList.filter(task => task.id !== id);
         // After removing, update the IDs of remaining tasks
@@ -60,9 +58,9 @@ class Project {
 
 
 class Task {
-    constructor(taskId, title, projectId, dueDate = null) {
+    constructor(taskId, description, projectId, dueDate = null) {
         this.id = taskId;
-        this.title = title;
+        this.description = description;
         this.isCompleted = false;
         this.isImportant = false;
         this.dueDate = dueDate; 
