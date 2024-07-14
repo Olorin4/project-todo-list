@@ -1,39 +1,50 @@
-// Project.js establishes main objects.
+// Objects.js establishes main objects.
 
 class Project {
     constructor(id, title) {
         this.id = id;
         this.title = title;
-        this.tasks = [];
+        this.isCurrent = false;
+        this.taskList = [];
+    }
+
+    setCurrent() {
+        this.isCurrent = true;
+    }
+
+    unsetCurrent() {
+        this.isCurrent = false;
     }
 
     addTask(task) {
-        this.tasks.push(task);
+        this.taskList.push(task);
     }
 }
+
 
 class Task {
     constructor(id, title) {
         this.id = id;
         this.title = title;
-        this.completed = false;
-        this.important = false;
+        this.isCompleted = false;
+        this.isImportant = false;
     }
 
     complete() {
-        this.completed = true;
+        this.isCompleted = true;
     }
     incomplete() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     important() {
-        this.important = true;
+        this.isImportant = true;
     }
     unimportant() {
-        this.important = false;
+        this.isImportant = false;
     }
 }
+
 
 const projects = {}; // Centralized storage for projects
 

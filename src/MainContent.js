@@ -7,8 +7,7 @@ let projectCount = 3;
 let taskCount = 0;
 const tabSwitcher = new TabSwitcher();
 
-
-function createProject(id, title) {
+function renderProject(id, title) {
     const projectList = document.querySelector('.project-list');
 
     // Create input field for a project:
@@ -19,8 +18,8 @@ function createProject(id, title) {
     projectTitle.dataset.project = id;
     projectTitle.readOnly = true;
 
-    makeCurrentProject(id, projectTitle);
-    renameProject(projectTitle);
+    // Setup event listeners for the project input
+    setupProjectEvents(id, projectTitle);
 
     projectList.appendChild(projectTitle);
 
@@ -33,6 +32,9 @@ function createProject(id, title) {
 
     // Add project to the projects object
     projects[id] = new Project(id, title);
+
+    // Make the newly created project the current project
+    setCurrentProject(id, projectTitle);
 }
 
 function renameProject(projectTitle) {
@@ -48,19 +50,43 @@ function renameProject(projectTitle) {
         projectTitle.readOnly = true;
         projectTitle.classList.remove('editable');
     });
+
+    // Event listener for enter key to make input read-only again:
+    projectTitle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            projectTitle.readOnly = true;
+            projectTitle.classList.remove('editable');
+        }
+    });
 }
 
-function makeCurrentProject(id, projectTitle) {
+function setCurrentProject(id, projectTitle) {
+    // Unset current-project status for all projects in the projects object
+    Object.values(projects).forEach(proj => {
+        proj.unsetCurrent();
+    });
+
+    // Set current-project status for the specified project
+    projects[id].setCurrent();
+
+    // Remove current-project class from all project elements
+    document.querySelectorAll('.project').forEach(proj => {
+        proj.classList.remove('current-project');
+    });
+
+    // Add current-project class to the specified project element
+    projectTitle.classList.add('current-project');
+    tabSwitcher.switchTab(id);
+}
+
+function setupProjectEvents(id, projectTitle) {
     // Event listener for switching tabs:
     projectTitle.addEventListener('click', () => {
-        // Remove current-project class from all projects
-        document.querySelectorAll('.project').forEach(proj => {
-            proj.classList.remove('current-project');
-        });
-        // Add current-project class to the clicked project
-        projectTitle.classList.add('current-project');
-        tabSwitcher.switchTab(id);
+        setCurrentProject(id, projectTitle);
     });
+
+    // Rename project setup
+    renameProject(projectTitle);
 }
 
 function setupAddProjectListener() {
@@ -68,31 +94,26 @@ function setupAddProjectListener() {
     addProjectButton.addEventListener('click', () => {
         projectCount++;
         const newProject = new Project(projectCount, `Project ${projectCount}`);
-        createProject(newProject.id, newProject.title);
+        renderProject(newProject.id, newProject.title);
     });
 }
 
-class DefaultProjectLoader {
-    constructor() {
-        this.loadDefaults();
-    }
+function loadDefaults() {
+    const defaultProjects = [
+        new Project(1, 'Personal'),
+        new Project(2, 'Work'),
+        new Project(3, 'Grocery List')
+    ];
 
-    loadDefaults() {
-        const defaultProjects = [
-            new Project(1, 'Personal'),
-            new Project(2, 'Work'),
-            new Project(3, 'Grocery List')
-        ];
+    // Create input fields for each default project:
+    defaultProjects.forEach(project => {
+        renderProject(project.id, project.title);
+    });
 
-        // Create input fields for each default project:
-        defaultProjects.forEach(project => {
-            createProject(project.id, project.title);
-        });
-
-        // Show the first project by default and set it as active
-        document.querySelector('.project').classList.add('current-project');
-        tabSwitcher.switchTab('1');
-    }
+    // Show the first project by default and set it as current
+    const firstProject = defaultProjects[0];
+    const firstProjectElement = document.querySelector(`.project[data-project="${firstProject.id}"]`);
+    setCurrentProject(firstProject.id, firstProjectElement);
 }
 
 function createTask(projectId, taskTitle) {
@@ -117,7 +138,9 @@ function setupAddTaskListener() {
             if (taskTitle) {
                 const activeProjectElement = document.querySelector('.project.current-project');
                 if (activeProjectElement) {
-                     // Clear the input field after adding the task
+                    const projectId = activeProjectElement.dataset.project;
+                    createTask(projectId, taskTitle);
+                    taskTitleInput.value = ""; // Clear input field
                 } else {
                     console.error("No active project found");
                 }
@@ -127,11 +150,10 @@ function setupAddTaskListener() {
 }
 
 function loadMainContent() {
-    new DefaultProjectLoader();
+    loadDefaults();
     new TabInitializer();
     setupAddProjectListener();
     setupAddTaskListener();
 }
-
 
 export { loadMainContent };

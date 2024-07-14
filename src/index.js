@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Move "add project" button to the end of the project-list div.
 // - Move "add task" button inside the task-title input field.
 // - Make selected Project change colors or move to current-project header.
-// - Add event listeners for the enter key (editing project name).
 // - Add memory using the Web Storage API.
 // - Add real links to the Dashboard (Home, Important, Tasks, Calendar). 
 // - Add task details, notes, subtasks, etc to the right-sidebar.
