@@ -1,6 +1,4 @@
-import { ProjectList, Project } from "./Objects";
-
-const projectList = new ProjectList();
+import { projectList, ProjectList, Project } from "./Objects";
 
 function loadDefaults() {
     console.log("Creating projects...");

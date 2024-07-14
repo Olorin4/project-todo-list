@@ -1,5 +1,4 @@
-import { Project, Task } from "./Objects";
-import { projectList } from "./ProjectManager";
+import { projectList, Project, Task } from "./Objects";
 
 function createTask(taskId, title, projectId) {
     const project = projectList.getProjectById(projectId);

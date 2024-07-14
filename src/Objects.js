@@ -18,6 +18,8 @@ class ProjectList {
     }
 }
 
+const projectList = new ProjectList();
+
 
 class Project {
     constructor(id, title) {
@@ -72,4 +74,4 @@ class Task {
 }
 
 
-export { ProjectList, Project, Task };
+export { projectList, Project, Task };
