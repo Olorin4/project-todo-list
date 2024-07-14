@@ -90,4 +90,73 @@ class Task {
 }
 
 
-export { projectList, Project, Task };
+class TaskCard {
+    constructor(task) {
+        this.task = task;
+        this.element = this.createTaskCardElement();
+    }
+
+    createTaskCardElement() {
+        const card = document.createElement('div');
+        card.classList.add('task-card');
+
+        const title = document.createElement('h3');
+        title.textContent = this.task.title;
+        card.appendChild(title);
+
+        const importantIcon = this.createIcon('important', () => this.toggleImportant());
+        card.appendChild(importantIcon);
+
+        const completeIcon = this.createIcon('complete', () => this.toggleComplete());
+        card.appendChild(completeIcon);
+
+        const dueDateIcon = this.createIcon('due-date', () => this.setDueDate());
+        card.appendChild(dueDateIcon);
+
+        const deleteIcon = this.createIcon('delete', () => this.deleteTask());
+        card.appendChild(deleteIcon);
+
+        return card;
+    }
+
+    createIcon(name, onClick) {
+        const icon = document.createElement('span');
+        icon.classList.add('icon', name);
+        icon.addEventListener('click', onClick);
+        return icon;
+    }
+
+    toggleImportant() {
+        this.task.isImportant ? this.task.markUnimportant() : this.task.markImportant();
+        this.updateIconState('important', this.task.isImportant);
+    }
+
+    toggleComplete() {
+        this.task.isCompleted ? this.task.incomplete() : this.task.complete();
+        this.updateIconState('complete', this.task.isCompleted);
+    }
+
+    setDueDate() {
+        const dueDate = prompt("Enter due date:");
+        if (dueDate) {
+            this.task.setDueDate(dueDate);
+        }
+    }
+
+    deleteTask() {
+        // Implement delete logic here
+        this.element.remove();
+    }
+
+    updateIconState(iconName, isActive) {
+        const icon = this.element.querySelector(`.icon.${iconName}`);
+        if (isActive) {
+            icon.classList.add('active');
+        } else {
+            icon.classList.remove('active');
+        }
+    }
+}
+
+
+export { projectList, Project, Task, TaskCard };

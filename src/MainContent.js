@@ -1,5 +1,6 @@
 // MainContent.js handles all DOM interactions of the main-content section.
 
+import { TaskCard } from "./Objects";
 import {
     projectList, loadDefaults, setCurrentProject,
     createProject, removeProject, logProjectList
@@ -11,6 +12,11 @@ function loadMainContent() {
     loadDefaults();
     console.log("Main content loaded with defaults");
 
+
+    const task = new Task(1, "Example Task", 1);
+    const taskCard = new TaskCard(task);
+    document.body.appendChild(taskCard.element);
+    
     // Debugging:
     createTask('Laundry', 1);
     createTask('Shopping', 1);
