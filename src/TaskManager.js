@@ -1,15 +1,23 @@
 import { projectList, Project, Task } from "./Objects";
 
-function createTask(taskId, title, projectId) {
+function createTask(title, projectId) {
     const project = projectList.getProjectById(projectId);
-    if (project) {
-        const newTask = new Task(taskId, title, projectId);
-        project.addTask(newTask);
 
-        console.log(`Task '${title}' created for Project '${project.title}' with ID '${newTask.id}'`);
-    } else {
-        console.error(`Project with id ${projectId} not found.`);
+    if (!project) {
+        console.error(`Project with ID ${projectId} not found.`);
+        return;
     }
+
+    // Calculate the task ID based on the current number of tasks in the project's taskList
+    const taskId = project.taskList.length + 1;
+
+    // Create a new task instance
+    const newTask = new Task(taskId, title, projectId);
+
+    // Add the task to the project's taskList
+    project.addTask(newTask);
+
+    console.log(`Task created: ${newTask.title} (ID: ${newTask.id})`);
 }
 
 

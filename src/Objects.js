@@ -52,7 +52,7 @@ class Project {
 
 class Task {
     constructor(taskId, title, projectId) {
-        this.id = `${projectId}${taskId}`;
+        this.id = taskId;
         this.title = title;
         this.isCompleted = false;
         this.isImportant = false;
