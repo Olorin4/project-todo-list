@@ -19,6 +19,8 @@ function createTask(description, projectId) {
     project.addTask(newTask);
 
     console.log(`Task created: ${newTask.description} (ID: ${newTask.id})`);
+
+    return newTask;
 }
 
 

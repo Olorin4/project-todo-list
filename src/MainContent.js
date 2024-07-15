@@ -1,10 +1,8 @@
-// MainContent.js handles all DOM interactions of the main-content section.
+// MainContent.js handles UI logic of the main-content section.
 
-import { TaskCard } from "./Objects";
-import {
-    projectList, loadDefaults, setCurrentProject,
-    createProject, removeProject, logProjectList
-} from "./ProjectManager";
+import { Task } from "./Objects";
+import { projectList, loadDefaults, setCurrentProject,
+        createProject, removeProject, logProjectList } from "./ProjectManager";
 import { createTask, removeTask } from "./TaskManager";
 
 
@@ -12,21 +10,25 @@ function loadMainContent() {
     loadDefaults();
     console.log("Main content loaded with defaults");
 
-
-    const task = new Task(1, "Example Task", 1);
-    const taskCard = new TaskCard(task);
-    document.body.appendChild(taskCard.element);
+    // Experimental:
+    
     
     // Debugging:
-    createTask('Laundry', 1);
-    createTask('Shopping', 1);
-    createTask('water the vineyard', 2);
-    createProject('Farming');
-    logProjectList();
-    setCurrentProject(2);
-    logProjectList();
-    removeTask(1, 1);
-    removeProject(2)
+    // Create a new Task instance
+    const myTask = createTask("Example Task", 1);
+
+    // Mark the task as important
+    myTask.markImportant();
+    
+    myTask.complete()
+
+    myTask.markUnimportant()
+
+    // Log the task to see the updated important status
+    console.log(myTask);
+
+
+
     logProjectList();
 }
 
