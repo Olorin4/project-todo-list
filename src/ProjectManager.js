@@ -38,10 +38,6 @@ function setCurrentProject(id) {
 
 
 function createProject(id, title) {
-    // Calculate the ID based on the current number of projects in projectList
-    id = projectList.projects.length + 1;
-
-    // Create a new project instance
     const newProject = new Project(id, title);
     
     // Add the project to the project list

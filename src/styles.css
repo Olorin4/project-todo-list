@@ -166,6 +166,10 @@ h3 {
     cursor: pointer;
 }
 
+.project img {
+    grid-column: 3;
+}
+
 .project:hover {
     border: none;
     background-color: #1f88c1;

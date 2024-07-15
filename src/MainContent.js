@@ -8,39 +8,54 @@ import { createTask, removeTask } from "./TaskManager";
 let projectCount = 3;
 
 
-function renderDefaultProjects() {
-
-}
-
-
 function setupAddProjectButton() {
-    // add event listener for add-project button that creates a new project 
-
-    const addButton = document.querySelector(".add-project").addEventListener("click", () => {
+    const projectCard = document.querySelector(".project-list");
+    const addBtn = document.querySelector(".add-project").addEventListener("click", () => {
         projectCount++;
-        createProject(`project-${projectCount}`, "");
-        renderProject(projectCount, `Project ${projectCount}`);
+        const project = createProject(projectCount, `Project ${projectCount}`);
+        renderProject(project);
         logProjectList();
     });
 }
 
 
 function setupDeleteProjectButton() {
-
+    const projectCard = document.querySelector(".project-list");
+    const deleteBtn = document.querySelectorAll(".delete-project").addEventListener("click", () => {
+        const project = removeProject(getProjectById(id));
+        project.remove();
+        projectCount--;
+        logProjectList();
+    });
 }
 
 
-function renderProject(id, title) {
+function renderProject(project) {
     // Creates a new input field under the project-list div with the new project.
     const projectCard = document.querySelector(".project-list");
-    const projectTitle = document.createElement('input');
-    projectCard.appendChild(projectTitle);
+    const projectTitle = document.createElement("input");
+    projectTitle.id = project.id;
+    projectTitle.value = project.title;
     projectTitle.type = 'text';
-    projectTitle.value = title;
     projectTitle.classList.add('project');
-    projectTitle.id = `project-${id}`;
     // projectTitle.placeholder = "name";
     projectTitle.readOnly = true;
+    projectCard.appendChild(projectTitle);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add(".delete-project");
+    projectTitle.appendChild(deleteBtn);
+
+    const deleteSvg = document.createElement("img");
+    deleteSvg.src = "./assets/delete.svg";
+    deleteSvg.alt = "Delete project";
+    deleteBtn.appendChild(deleteSvg);
+
+    deleteBtn.addEventListener("click", () => {
+        removeProject(project.id);
+        projectTitle.remove();
+        logProjectList();
+    });
 
     // Set up event listener for switching tabs:
     projectTitle.addEventListener('click', () => {
@@ -70,6 +85,10 @@ function renderProject(id, title) {
     });
 }
 
+
+function renderDefaultProjects() {
+
+}
 
 
 function loadMainContent() {
