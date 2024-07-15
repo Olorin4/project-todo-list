@@ -7,18 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // loadDashboard();
     // loadHeader();
     // loadRightSidebar();
+    // loadFooter();
 });
 
 
 
 // TO DO:
+// - Make ***add-project*** and add-task buttons functional.
+// - Add "delete project" button, visible only when project is hovered.
 // - Add "completed", "delete task" and "important" buttons to the task card.
-// - Add "delete project" button, visible only when project is hovered
 // - Move "add project" button to the end of the project-list div.
-// - Move "add task" button inside the task-title input field.
-// - Make selected Project change colors or move to current-project header.
+// - Copy title of current Project to main content header.
 // - Add memory using the Web Storage API.
-// - Add real links to the Dashboard (Home, Important, Tasks, Calendar). 
+// - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Add calendar to right-sidebar.
 // - Add links Today, Tomorrow and My Week to the Dashboard.
@@ -33,4 +34,5 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Optional: Move Project list to the Dashboard.
 // - Create a Support page with a contact form.
 // - Create rudimentary Privacy agreement.
+// - Change Fonts.
 // - Create Footer.

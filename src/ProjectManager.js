@@ -44,7 +44,8 @@ function createProject(title) {
     
     // Add the project to the project list
     projectList.addProject(newProject);
-
+    console.log(`Project with ID ${id} created.`);
+    
     setCurrentProject(id);
 
     return newProject;
