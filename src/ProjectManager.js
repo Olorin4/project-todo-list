@@ -46,6 +46,8 @@ function createProject(title) {
     projectList.addProject(newProject);
 
     setCurrentProject(id);
+
+    return newProject;
 }
 
 
