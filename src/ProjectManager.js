@@ -21,6 +21,8 @@ function loadDefaults() {
 
 
 function setCurrentProject(id) {
+    if (projectList.getProjectById(id).isCurrent) { return };
+
     console.log(`Setting project ${id} as current`);
 
     // Unset current-project status for all projects in the projectList object
@@ -35,9 +37,9 @@ function setCurrentProject(id) {
 }
 
 
-function createProject(title) {
+function createProject(id, title) {
     // Calculate the ID based on the current number of projects in projectList
-    const id = projectList.projects.length + 1;
+    id = projectList.projects.length + 1;
 
     // Create a new project instance
     const newProject = new Project(id, title);
@@ -45,7 +47,7 @@ function createProject(title) {
     // Add the project to the project list
     projectList.addProject(newProject);
     console.log(`Project with ID ${id} created.`);
-    
+
     setCurrentProject(id);
 
     return newProject;
