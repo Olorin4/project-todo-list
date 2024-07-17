@@ -150,24 +150,34 @@ h3 {
 }
 
 .project-list {
-    display: grid;
-    grid-template-columns: 2.5fr 4fr 1fr;
-    justify-content: flex-end;
+    padding-right: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-size: 0.95em;
 }
 
 .project {
+    display: grid;
+    grid-template-columns: 40px 15px 120px;
+    grid-template-rows: 25px;
+}
+
+.delete-project {
     grid-column: 2;
+    grid-row: 1;
+    height: 20px;
+}
+
+.project-title {
+    grid-column: 3;
+    grid-row: 1;
     width: 95%;
     background-color: #1A92D3;
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.project img {
-    grid-column: 3;
 }
 
 .project:hover {
@@ -181,7 +191,6 @@ h3 {
     background-color: #1f88c1;
     border-radius: 5px;
 }
-
 
 
 /* MAIN CONTENT */

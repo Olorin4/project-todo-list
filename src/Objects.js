@@ -46,9 +46,9 @@ class Project {
     removeTask(id) {
         this.taskList = this.taskList.filter(task => task.id !== id);
         // After removing, update the IDs of remaining tasks
-        this.taskList.forEach((task, index) => {
-            task.id = index + 1;
-        });
+        // this.taskList.forEach((task, index) => {
+        //     task.id = index + 1;
+        // });
     }
 
     getTaskById(id) {
