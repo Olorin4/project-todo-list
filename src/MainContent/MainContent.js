@@ -1,19 +1,18 @@
-// MainContent.js handles all UI logic of the main-content section.
+// MainContent.js handles all DOM manipulation of the main-content section.
+import { projectList } from "../Dashboard/ProjectManager";
+import { createTask, removeTask } from "./TaskManager";
 
-import { projectList, loadDefaults } from "./ProjectManager";
 
 export function renderCurrentProject() {
     const currentProjectTitle = document.querySelector(".current-project h2");
-    const currentProject = projectList.projects.find(project => project.isCurrent);
+    const currentProject = projectList.getCurrentProject();
     if (currentProject) {
         currentProjectTitle.textContent = currentProject.title;
     } else {
         currentProjectTitle.textContent = "";
         console.error("No current project found.");
     }
-    
 }
-
 
 
 export function loadMainContent() {

@@ -1,6 +1,6 @@
-// ProjectRenderer.js handles UI logic of the Projects menu item.
+// ProjectRenderer.js handles DOM manipulation of the Projects menu item.
 
-import { Project } from "./Objects";
+import { Project } from "../Objects";
 import { projectList, loadDefaults, setCurrentProject, createProject,
         removeProject, renameProject, logProjectList } from "./ProjectManager";
 

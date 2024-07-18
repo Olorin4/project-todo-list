@@ -1,5 +1,8 @@
-import { ProjectList, Project } from "./Objects";
-import { renderCurrentProject } from "./MainContent";
+// ProjectManager.js handles all project logic: creating, deleting
+// renaming and setting as current.
+
+import { ProjectList, Project } from "../Objects";
+import { renderCurrentProject } from "../MainContent/MainContent";
 
 
 const projectList = new ProjectList();
@@ -74,6 +77,7 @@ function removeProject(id) {
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
     if (!projectToRemove.isCurrent || projectList.projects.length <= 0) {
+        renderCurrentProject();
         return
     } else if (projectToRemove.isCurrent && projectToRemove.id == projectList.projects.length+1) {
         setCurrentProject(id-1);
@@ -86,6 +90,7 @@ function removeProject(id) {
 function renameProject(id, newTitle) {
     const projectToRename = projectList.getProjectById(id);
     projectToRename.title = newTitle;
+    renderCurrentProject();
     console.log(`Project with ID ${id} renamed to ${newTitle}.`);
     logProjectList();
 }

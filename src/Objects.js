@@ -20,9 +20,11 @@ class ProjectList {
     getProjectById(id) {
         return this.projects.find(project => project.id === id);
     }
+
+    getCurrentProject() {
+        return this.projects.find(project => project.isCurrent);
+    }
 }
-
-
 
 
 class Project {
@@ -30,7 +32,7 @@ class Project {
         this.id = id;
         this.title = title;
         this.isCurrent = false;
-        this.taskList = [];    // Array to hold Task instances
+        this.tasks = [];    // Array to hold Task instances
     }
 
     setCurrent() {
@@ -41,30 +43,32 @@ class Project {
     }
 
     addTask(task) {
-        this.taskList.push(task);
+        this.tasks.push(task);
     }
     removeTask(id) {
-        this.taskList = this.taskList.filter(task => task.id !== id);
+        this.tasks = this.tasks.filter(task => task.id !== id);
         // After removing, update the IDs of remaining tasks
-        // this.taskList.forEach((task, index) => {
-        //     task.id = index + 1;
-        // });
+        this.tasks.forEach((task, index) => {
+            task.id = index + 1;
+        });
     }
 
     getTaskById(id) {
-        return this.taskList.find(task => task.id === id);
+        return this.tasks.find(task => task.id === id);
     }
 }
 
 
 class Task {
-    constructor(taskId, description, projectId, dueDate = null) {
+    constructor(taskId, title, projectId, dueDate = null) {
         this.id = taskId;
-        this.description = description;
+        this.title = title;
         this.projectId = projectId;
         this.dueDate = dueDate; 
         this.isCompleted = false;
         this.isImportant = false;
+        this.notes = "";
+        this.subtasks = [];
     }
 
     complete() {
@@ -87,7 +91,38 @@ class Task {
     setDueDate(dueDate) {
         this.dueDate = dueDate;
     }
+
+    addSubtask(subtask) {
+        this.subtasks.push(id);
+    }
+    removeSubtask(id) {
+        this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
+        // After removing, update the IDs of remaining subtasks
+        this.subtasks.forEach((subtask, index) => {
+            subtask.id = index + 1;
+        });
+    }
+
+    getSubtaskById(id) {
+        return this.subtasks.find(subtask => subtask.id === id);
+    }
 }
 
 
-export { ProjectList, Project, Task };
+class Subtask {
+    constructor(id, description) {
+        this.id = id;
+        this.description = description;
+        this.isCompleted = false;
+    }
+
+    complete() {
+        this.isCompleted = true;
+    }
+    incomplete() {
+        this.isCompleted = false;
+    }
+}
+
+
+export { ProjectList, Project, Task, Subtask };

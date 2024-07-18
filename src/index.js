@@ -1,7 +1,7 @@
 import "./normalize.css";
 import "./styles.css";
-import { loadDashboard } from "./Dashboard";
-import { loadMainContent } from "./MainContent";
+import { loadDashboard } from "./Dashboard/Dashboard";
+import { loadMainContent } from "./MainContent/MainContent";
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDashboard();
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Copy title of current Project to main content header.
 // - Add Tasks to current Project.
 // - Add "completed", "due date" and "important" buttons to the task card.
 // - Add memory using the Web Storage API.
