@@ -56,6 +56,7 @@ function setupDeleteProjectButton() {
 function setupInputProperties(id, projectTitle) {
     // Set up event listener for switching tabs:
     projectTitle.addEventListener('click', () => {
+        projectTitle.blur();
         setCurrentProject(id);
     });
 

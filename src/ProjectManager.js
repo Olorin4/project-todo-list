@@ -1,4 +1,5 @@
 import { ProjectList, Project } from "./Objects";
+import { renderCurrentProject } from "./MainContent";
 
 
 const projectList = new ProjectList();
@@ -26,12 +27,18 @@ function loadDefaults() {
 
 
 function setCurrentProject(id) {
-    if (id === null) { console.log("No current project set."); return; }
+    const projectToSet = projectList.getProjectById(id);
 
-    let project = projectList.getProjectById(id);
+    if (!projectToSet) {
+        console.error(`Project with ID ${id} not found.`);
+        return;
+    }
 
-    if (!project) {console.error(`Project with ID ${id} not found.`); return; }
-    if (project.isCurrent) { return; }
+    if (projectToSet.isCurrent) {
+        return; // No need to update if already current
+    }
+
+    console.log(`Setting project ${id} as current`);
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
@@ -39,9 +46,12 @@ function setCurrentProject(id) {
     });
 
     // Set current-project status for the specified project
-    project.setCurrent();
+    projectToSet.setCurrent();
 
-    console.log("Current project set:", project);
+    // Update UI to reflect current project
+    renderCurrentProject();
+    
+    console.log("Current project set:", projectToSet);
 }
 
 
@@ -57,16 +67,19 @@ function createProject(id, title) {
 
 function removeProject(id) {
     const projectToRemove = projectList.getProjectById(id);
-    const wasCurrent = projectToRemove.isCurrent;
 
     // Remove the project from projectList
     projectList.removeProject(id);
     
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
-    if (wasCurrent) {
+    if (!projectToRemove.isCurrent || projectList.projects.length <= 0) {
+        return
+    } else if (projectToRemove.isCurrent && projectToRemove.id == projectList.projects.length+1) {
+        setCurrentProject(id-1);
+    } else {
         setCurrentProject(id);
-    } 
+    }
 }
     
 

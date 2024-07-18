@@ -219,6 +219,15 @@ h3 {
     gap: 10px;
 }
 
+.current-project {
+    background-color: rgba(12, 12, 12, 0.2);
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
 /* .task p {
     font-size: 0.8em;
 } */

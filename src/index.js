@@ -1,10 +1,11 @@
 import "./normalize.css";
 import "./styles.css";
 import { loadDashboard } from "./Dashboard";
+import { loadMainContent } from "./MainContent";
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDashboard();
-    // loadMainContent();
+    loadMainContent();
     // loadHeader();
     // loadRightSidebar();
     // loadFooter();
@@ -12,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - When creating a new project, focus on empty input field to rename.
-// - Add "delete project" button, visible only when project is hovered.
-// - Add "completed", "delete task" and "important" buttons to the task card.
-// - Move "add project" button to the end of the project-list div.
 // - Copy title of current Project to main content header.
+// - Add Tasks to current Project.
+// - Add "completed", "due date" and "important" buttons to the task card.
 // - Add memory using the Web Storage API.
+// - Fix delete.svg issue.
+
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Add calendar to right-sidebar.
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Make Search functional.
 // - Add tag colors to task card.
 // - Add a 15 project cap.
-// - Optional: Move Project list to the Dashboard.
+// - Optional: When creating a new project, focus on empty input field to rename.
 // - Create a Support page with a contact form.
 // - Create rudimentary Privacy agreement.
 // - Change Fonts.
