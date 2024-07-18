@@ -1,11 +1,12 @@
-// MainContent.js handles UI logic of the main-content section.
+// ProjectRenderer.js handles UI logic of the Projects menu item.
 
-import { projectList, Project, Task } from "./Objects";
-import { loadDefaults, setCurrentProject, createProject,
+import { Project } from "./Objects";
+import { projectList, loadDefaults, setCurrentProject, createProject,
         removeProject, logProjectList } from "./ProjectManager";
-import { createTask, removeTask } from "./TaskManager";
+
 
 let projectCount = 0;
+
 
 function renderDefaultProjects() {
     loadDefaults();
@@ -15,6 +16,7 @@ function renderDefaultProjects() {
     });
 
     projectCount = projectList.projects.length;
+
     console.log(`projectCount is ${projectCount}`);
 }
 
@@ -31,28 +33,26 @@ function setupAddProjectButton() {
 
 
 function setupDeleteProjectButton() {
-    const projectListContainer = document.querySelector(".project-list");
-    projectListContainer.addEventListener("click", (event) => {
-        if (event.target.classList.contains("delete-project")) {
+    const projectCard = document.querySelector(".project-list").addEventListener("click", (event) => {
+        if (event.target.classList.contains("delete-project")) { //?
             // Find the nearest ancestor element with the class "project"
             const projectTab = event.target.closest(".project");
 
-            // Check if projectTab is found
-            if (projectTab) {
-                const projectId = parseInt(projectTab.dataset.projectId, 10); // Extract the id from data-project-id
+            // Extract the id from data-project-id
+            const projectId = parseInt(projectTab.dataset.projectId, 10);  //?
 
-                // Remove the project from the projectList
-                removeProject(projectId);
+            // Remove the project from the projectList
+            removeProject(projectId);
 
-                // Remove the project tab from the DOM
-                projectTab.remove();
+            // Remove the project tab from the DOM
+            projectTab.remove();
 
-                projectCount--;
-                console.log(`projectCount is ${projectCount}`);
+            projectCount--;
 
-                renderProject();
-                logProjectList();
-            }
+            console.log(`projectCount is ${projectCount}`);
+
+            renderProject();
+            logProjectList();
         }
     });
 }
@@ -60,7 +60,7 @@ function setupDeleteProjectButton() {
 
 function renderProject() {
     const projectsCard = document.querySelector(".project-list");
-    projectsCard.innerHTML = '';
+    projectsCard.innerHTML = "";
 
     projectList.projects.forEach(project => {
         const projectTab = document.createElement("div");
@@ -109,24 +109,4 @@ function renderProject() {
 }
 
 
-function loadMainContent() {
-    setupAddProjectButton()
-    setupDeleteProjectButton()
-    renderDefaultProjects();
-    console.log("Main content loaded with defaults");
-
-    
-    
-
-
-
-
-    // Experimental:
-    
-    
-    // Debugging:
-    logProjectList();
-}
-
-
-export { loadMainContent };
+export { setupAddProjectButton, setupDeleteProjectButton, renderDefaultProjects };

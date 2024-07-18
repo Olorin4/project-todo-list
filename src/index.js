@@ -1,10 +1,10 @@
 import "./normalize.css";
 import "./styles.css";
-import { loadMainContent } from "./MainContent";
+import { loadDashboard } from "./Dashboard";
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadMainContent();
-    // loadDashboard();
+    loadDashboard();
+    // loadMainContent();
     // loadHeader();
     // loadRightSidebar();
     // loadFooter();
@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Make ***add-project*** and add-task buttons functional.
+// - When creating a new project, focus on empty input field to rename.
+// - Write rename function.
 // - Add "delete project" button, visible only when project is hovered.
 // - Add "completed", "delete task" and "important" buttons to the task card.
 // - Move "add project" button to the end of the project-list div.

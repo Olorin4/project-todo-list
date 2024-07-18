@@ -22,7 +22,7 @@ class ProjectList {
     }
 }
 
-const projectList = new ProjectList();
+
 
 
 class Project {
@@ -90,4 +90,4 @@ class Task {
 }
 
 
-export { projectList, Project, Task };
+export { ProjectList, Project, Task };

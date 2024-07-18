@@ -1,4 +1,7 @@
-import { projectList, Project } from "./Objects";
+import { ProjectList, Project } from "./Objects";
+
+
+const projectList = new ProjectList();
 
 
 function loadDefaults() {
@@ -23,8 +26,12 @@ function loadDefaults() {
 
 
 function setCurrentProject(id) {
+    if (id === null) { console.log("No current project set."); return; }
+
     let project = projectList.getProjectById(id);
-    if (project.isCurrent) { return };
+
+    if (!project) {console.error(`Project with ID ${id} not found.`); return; }
+    if (project.isCurrent) { return; }
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
@@ -58,7 +65,7 @@ function removeProject(id) {
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
     if (wasCurrent) {
-        setCurrentProject(id-1);
+        setCurrentProject(id);
     } 
 }
     
