@@ -70,6 +70,14 @@ function removeProject(id) {
 }
     
 
+function renameProject(id, newTitle) {
+    const projectToRename = projectList.getProjectById(id);
+    projectToRename.title = newTitle;
+    console.log(`Project with ID ${id} renamed to ${newTitle}.`);
+    logProjectList();
+}
+
+
 // Function to log projectList and its contents
 function logProjectList() {
     console.log("Project List:", projectList.projects);
@@ -77,5 +85,5 @@ function logProjectList() {
 
 export {
     projectList, loadDefaults, setCurrentProject,
-    createProject, removeProject, logProjectList
+    createProject, removeProject, renameProject, logProjectList
 };

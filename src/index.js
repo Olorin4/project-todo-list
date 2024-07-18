@@ -11,10 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 // TO DO:
 // - When creating a new project, focus on empty input field to rename.
-// - Write rename function.
 // - Add "delete project" button, visible only when project is hovered.
 // - Add "completed", "delete task" and "important" buttons to the task card.
 // - Move "add project" button to the end of the project-list div.

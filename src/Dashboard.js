@@ -1,19 +1,11 @@
 // Dashboard.js handles UI logic of the main-content section.
 
-import { setupAddProjectButton, setupDeleteProjectButton,
-        renderDefaultProjects } from "./ProjectRenderer";
-import { logProjectList } from "./ProjectManager";
+import { renderDefaultProjects, logProjectList } from "./ProjectRenderer";
 
 
 function loadDashboard() {
-    setupAddProjectButton()
-    setupDeleteProjectButton()
     renderDefaultProjects();
     console.log("Main content loaded with defaults");
-
-    
-    
-
 
 
 
@@ -26,3 +18,23 @@ function loadDashboard() {
 
 
 export { loadDashboard };
+
+// function setupDeleteProjectButton() {
+//     document.querySelectorAll(".delete-project").forEach((btn) => {
+//         btn.addEventListener("click", (event) => {
+//             // Find the nearest ancestor element with the class "project"
+//             const projectTab = event.target.closest(".project");
+
+//             // Extract the id from data-project-id
+//             const projectId = parseInt(projectTab.dataset.projectId, 10);  //?
+//             removeProject(projectId);
+//             projectTab.remove();
+
+//             projectCount--;
+//             console.log(`projectCount is ${projectCount}`);
+
+//             renderProject();
+//             logProjectList();
+//         });
+//     });
+// }

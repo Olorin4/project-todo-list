@@ -2,7 +2,7 @@
 
 import { Project } from "./Objects";
 import { projectList, loadDefaults, setCurrentProject, createProject,
-        removeProject, logProjectList } from "./ProjectManager";
+        removeProject, renameProject, logProjectList } from "./ProjectManager";
 
 
 let projectCount = 0;
@@ -18,6 +18,8 @@ function renderDefaultProjects() {
     projectCount = projectList.projects.length;
 
     console.log(`projectCount is ${projectCount}`);
+
+    setupAddProjectButton();
 }
 
 
@@ -33,26 +35,50 @@ function setupAddProjectButton() {
 
 
 function setupDeleteProjectButton() {
-    const projectCard = document.querySelector(".project-list").addEventListener("click", (event) => {
-        if (event.target.classList.contains("delete-project")) { //?
+    document.querySelectorAll(".delete-project").forEach((btn) => {
+        btn.addEventListener("click", (event) => {
             // Find the nearest ancestor element with the class "project"
             const projectTab = event.target.closest(".project");
-
             // Extract the id from data-project-id
             const projectId = parseInt(projectTab.dataset.projectId, 10);  //?
-
-            // Remove the project from the projectList
             removeProject(projectId);
-
-            // Remove the project tab from the DOM
             projectTab.remove();
 
             projectCount--;
-
             console.log(`projectCount is ${projectCount}`);
 
             renderProject();
             logProjectList();
+        });
+    });
+}
+
+function setupInputProperties(id, projectTitle) {
+    // Set up event listener for switching tabs:
+    projectTitle.addEventListener('click', () => {
+        setCurrentProject(id);
+    });
+
+    // Event listener for double-click to make input editable:
+    projectTitle.addEventListener('dblclick', () => {
+        projectTitle.readOnly = false;
+        projectTitle.classList.add('editable');
+        projectTitle.focus(); // Focus the input field for immediate editing
+    });
+
+    // Event listener for blur to make input read-only again:
+    projectTitle.addEventListener('blur', () => {
+        projectTitle.classList.remove('editable');
+        projectTitle.readOnly = true;
+        renameProject(id, projectTitle.value);
+    });
+
+    // Event listener for enter key to make input read-only again:
+    projectTitle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            projectTitle.classList.remove('editable');
+            projectTitle.readOnly = true;
+            projectTitle.blur();
         }
     });
 }
@@ -74,39 +100,14 @@ function renderProject() {
         projectTitle.classList.add('project-title');
         projectTitle.readOnly = true;
         projectTab.appendChild(projectTitle);
+        setupInputProperties(project.id, projectTitle)
 
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-project");
         projectTab.appendChild(deleteBtn);
-
-        // Set up event listener for switching tabs:
-        projectTitle.addEventListener('click', () => {
-            setCurrentProject(project.id);
-        });
-
-        // Event listener for double-click to make input editable:
-        projectTitle.addEventListener('dblclick', () => {
-            projectTitle.readOnly = false;
-            projectTitle.classList.add('editable');
-            projectTitle.focus(); // Focus the input field for immediate editing
-        });
-
-        // Event listener for blur to make input read-only again:
-        projectTitle.addEventListener('blur', () => {
-            projectTitle.classList.remove('editable');
-            projectTitle.readOnly = true;
-        });
-
-        // Event listener for enter key to make input read-only again:
-        projectTitle.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                projectTitle.classList.remove('editable');
-                projectTitle.readOnly = true;
-                projectTitle.blur();
-            }
-        });
     });
+    setupDeleteProjectButton();
 }
 
 
-export { setupAddProjectButton, setupDeleteProjectButton, renderDefaultProjects };
+export { renderDefaultProjects, logProjectList };
