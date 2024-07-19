@@ -1,4 +1,4 @@
-// Dashboard.js handles UI logic of the main-content section.
+// Dashboard.js handles UI logic of the dashboard section.
 
 import { renderDefaultProjects, logProjectList } from "./ProjectRenderer";
 

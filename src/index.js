@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Add "completed", "due date" and "important" buttons to the task card.
 // - Add memory using the Web Storage API.
 // - Fix delete.svg issue.
+// - Consider moving ProjectManager.js functions into class methods.
 
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add task details, notes, subtasks, etc to the right-sidebar.

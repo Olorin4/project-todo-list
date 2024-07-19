@@ -3,7 +3,7 @@
 class ProjectList {
     constructor() {
         this.projects = [];    // Array to hold Project instances
-        this.projectCount = 0;
+        this.projectCount = this.projects.length;
     }
 
     addProject(project) {
@@ -36,7 +36,7 @@ class Project {
         this.title = title;
         this._isCurrent = false;
         this.tasks = [];    // Array to hold Task instances
-        this.taskCount = 0;
+        this.taskCount = this.tasks.length;
     }
 
     get isCurrent() {
@@ -60,7 +60,7 @@ class Project {
     }
 
     get currentTask() {
-        return this.tasks.find(task => task.isCurrent);
+        return this.tasks.find(task => task._isCurrent);
     }
 
     getTaskById(id) {
@@ -70,37 +70,38 @@ class Project {
 
 
 class Task {
-    constructor(id, title, projectId, dueDate = null) {
+    constructor(id, title, projectId) {
         this.id = id;
         this.title = title;
         this.projectId = projectId;
-        this.dueDate = dueDate; 
-        this.isCurrent = false;
-        this.isCompleted = false;
-        this.isImportant = false;
+        this.dueDate = undefined; 
+        this._isCurrent = false;
+        this._isCompleted = false;
+        this._isImportant = false;
         this.notes = "";
         this.subtasks = [];
+        this.subtasksCount = this.subtasks.length;
     }
 
-    setCurrent() {
-        this.isCurrent = true;
+    get isCurrent() {
+        return this._isCurrent;
     }
-    unsetCurrent() {
-        this.isCurrent = false;
-    }
-
-    complete() {
-        this.isCompleted = true;
-    }
-    incomplete() {
-        this.isCompleted = false;
+    set isCurrent(value) {
+        this._isCurrent = value;
     }
 
-    markImportant() {
-        this.isImportant = true;
+    get isCompleted() {
+        return this._isCompleted;
     }
-    markUnimportant() {
-        this.isImportant = false;
+    set isCompleted(value) {
+        this._isCompleted = value;
+    }
+
+    get isImportant() {
+        return this._isImportant;
+    }
+    set isImportant(value) {
+        this._isImportant = value;
     }
 
     getDueDate() {
@@ -111,7 +112,7 @@ class Task {
     }
 
     addSubtask(subtask) {
-        this.subtasks.push(id);
+        this.subtasks.push(subtask);
     }
     removeSubtask(id) {
         this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
@@ -131,14 +132,14 @@ class Subtask {
     constructor(id, description) {
         this.id = id;
         this.description = description;
-        this.isCompleted = false;
+        this._isCompleted = false;
     }
 
-    complete() {
-        this.isCompleted = true;
+    get isCompleted() {
+        return this._isCompleted;
     }
-    incomplete() {
-        this.isCompleted = false;
+    set isCompleted(value) {
+        this._isCompleted = value;
     }
 }
 

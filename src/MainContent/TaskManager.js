@@ -4,8 +4,13 @@ import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 
 
-function setCurrentTask() {
+function setCurrentTask(id) {
     const currentProject = projectList.currentProject;
+    if (!currentProject) {
+        console.error("No current project selected.");
+        return;
+    }
+
     const taskToSetAsCurrent = currentProject.getTaskById(id);
 
     if (!taskToSetAsCurrent) {
@@ -20,14 +25,11 @@ function setCurrentTask() {
 
     // Unset current-task status for all tasks in the project
     currentProject.tasks.forEach(task => {
-        task.unsetCurrent();
+        task.isCurrent = false;
     });
 
     // Set current-task status for the specified task
-    taskToSetAsCurrent.setCurrent();
-
-    // Update UI to reflect current task
-    renderCurrentTask();
+    taskToSetAsCurrent.isCurrent = true;
     
     console.log("Current task set:", taskToSetAsCurrent);
 }
@@ -35,6 +37,11 @@ function setCurrentTask() {
 
 function createTask(id, title) {
     const currentProject = projectList.currentProject;
+    if (!currentProject) {
+        console.error("No current project selected.");
+        return;
+    }
+    
     const newTask = new Task(id, title, currentProject.id);
     currentProject.addTask(newTask);
 
@@ -46,31 +53,82 @@ function createTask(id, title) {
 
 function removeTask(taskId, projectId) {
     const project = projectList.getProjectById(projectId);
+    if (!project) {
+        console.error(`Project with ID ${projectId} not found.`);
+        return;
+    }
     project.removeTask(taskId);
     
     console.log(`Task removed: ID ${taskId} from project ${projectId}`);
 }
 
 
-function markAsCompleted() {
+function markTaskAsCompleted(id) {
+    const currentProject = projectList.currentProject;
+    if (!currentProject) {
+        console.error("No current project selected.");
+        return;
+    }
 
+    const task = currentProject.getTaskById(id);
+    if (!task) {
+        console.error(`Task with ID ${id} not found.`);
+        return;
+    }
+
+    task.isCompleted = true;
+    console.log(`Task with ID ${id} marked as completed.`);
 }
 
 
-function markAsImportant() {
+function markTaskAsImportant(id) {
+    const currentProject = projectList.currentProject;
+    if (!currentProject) {
+        console.error("No current project selected.");
+        return;
+    }
 
+    const task = currentProject.getTaskById(id);
+    if (!task) {
+        console.error(`Task with ID ${id} not found.`);
+        return;
+    }
+
+    task.isImportant = true;
+    console.log(`Task with ID ${id} marked as important.`);
 }
 
 
-function setDueDate() {
+function setTaskDueDate(id, dueDate) {
+    const currentProject = projectList.currentProject;
+    if (!currentProject) {
+        console.error("No current project selected.");
+        return;
+    }
 
+    const task = currentProject.getTaskById(id);
+    if (!task) {
+        console.error(`Task with ID ${id} not found.`);
+        return;
+    }
+
+    task.setDueDate(dueDate);
+    console.log(`Due date set for task with ID ${id}.`);
 }
 
 
 // Function to log taskList and its contents
 function logTaskList() {
-    console.log("Task List:", Project.tasks);
+    console.log("Task List:");
+    projectList.projects.forEach(project => {
+        console.log(`Project ID ${project.id}: ${project.title}`);
+        project.tasks.forEach(task => {
+            console.log(`  - Task ID ${task.id}: ${task.title} 
+                (Current:${task.isCurrent}, Completed: ${task.isCompleted}, Important: ${task.isImportant}, Due Date: ${task.dueDate})`);
+        });
+    });
 }
 
 
-export { createTask, removeTask, logTaskList };
+export { createTask, removeTask, markTaskAsCompleted,
+    markTaskAsImportant, setTaskDueDate, logTaskList };

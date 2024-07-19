@@ -44,7 +44,7 @@ function setCurrentProject(id) {
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
-        proj.isCurrent = false;;
+        proj.isCurrent = false;
     });
 
     // Set current-project status for the specified project
@@ -64,7 +64,7 @@ function createProject(id, title) {
 }
 
 
-function removeProject(id) {
+function deleteProject(id) {
     const projectToRemove = projectList.getProjectById(id);
 
     // Remove the project from projectList
@@ -96,5 +96,5 @@ function logProjectList() {
 
 export {
     projectList, loadDefaults, setCurrentProject,
-    createProject, removeProject, renameProject, logProjectList
+    createProject, deleteProject, renameProject, logProjectList
 };

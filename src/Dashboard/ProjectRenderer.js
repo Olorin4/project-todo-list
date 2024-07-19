@@ -2,7 +2,7 @@
 
 import { Project } from "../Objects";
 import { projectList, loadDefaults, setCurrentProject, createProject,
-    removeProject, renameProject, logProjectList } from "./ProjectManager";
+    deleteProject, renameProject, logProjectList } from "./ProjectManager";
 
 
 function renderDefaultProjects() {
@@ -54,7 +54,7 @@ function setupDeleteProjectButton() {
             const projectTab = event.target.closest(".project");
             // Extract the id from data-project-id
             const projectId = parseInt(projectTab.dataset.projectId, 10);  //?
-            removeProject(projectId);
+            deleteProject(projectId);
             projectTab.remove();
 
             console.log(`projectCount is ${projectList.projectCount}`);
