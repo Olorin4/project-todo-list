@@ -1,6 +1,5 @@
-# project-todo-list
+# Advanced To-Do List Application
 
-**Project Title**: Advanced To-Do List Application
 
 **Description**:
 This project is an advanced to-do list application designed to help users manage their tasks efficiently. The application allows users to create, read, update, and delete tasks and projects. It includes features like setting due dates, prioritizing tasks, categorizing tasks into projects, and persistent data storage. The main goal of the project is to provide a user-friendly interface and enhance productivity through effective task management.
