@@ -44,11 +44,11 @@ function setCurrentProject(id) {
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
-        proj.unsetCurrent();
+        proj.isCurrent = false;;
     });
 
     // Set current-project status for the specified project
-    projectToSetAsCurrent.setCurrent();
+    projectToSetAsCurrent.isCurrent = true;
     
     console.log("Current project set:", projectToSetAsCurrent);
 }

@@ -21,7 +21,7 @@ class ProjectList {
     }
 
     get currentProject() {
-        return this.projects.find(project => project.isCurrent);
+        return this.projects.find(project => project._isCurrent);
     }
 
     getProjectById(id) {
@@ -34,18 +34,18 @@ class Project {
     constructor(id, title) {
         this.id = id;
         this.title = title;
-        this.isCurrent = false;
+        this._isCurrent = false;
         this.tasks = [];    // Array to hold Task instances
         this.taskCount = 0;
     }
 
-    setCurrent() {
-        this.isCurrent = true;
+    get isCurrent() {
+        return this._isCurrent;
     }
-    unsetCurrent() {
-        this.isCurrent = false;
+    set isCurrent(value) {
+        this._isCurrent = value;
     }
-
+    
     addTask(task) {
         this.tasks.push(task);
         this.taskCount++;
