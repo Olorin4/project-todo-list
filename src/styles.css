@@ -93,18 +93,33 @@ button a,
 .main-menu {
     font-weight: 500;
     display: grid;
-    grid-template-columns: 150px;
-    gap: 35px;
+    grid-template-columns: 160px;
+    grid-template-rows: 1fr 9fr 2.14fr;
+    gap: 25px;
+}
+
+.menu-section-1 {
+    grid-row: 1;
 }
 
 .menu-section-2 {
-    margin-bottom: 380px;
+    grid-row: 2;
 }
 
-.menu-item a {
-    display: flex;
-    justify-content: baseline;
+.menu-section-3 {
+    grid-row: 3;
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-content: center;
     align-items: center;
+    cursor: default;
+}
+
+.menu-item:hover {
+    background-color: #1f88c1;
 }
 
 .menu-item img {
@@ -113,10 +128,202 @@ button a,
     margin: 0 12px;
 }
 
-a h3 {
-    font-size: 0.9em;
+h3 {
+    font-size: 0.95em;
     font-weight: 600;
 }
+
+.add-project {
+    width: 1.5em;
+    margin-top: 3px;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item:hover .add-project {
+    background-color: #1f88c1;
+    border-radius: 5px;
+}
+
+.project-list {
+    padding-right: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95em;
+}
+
+.project {
+    display: grid;
+    grid-template-columns: 40px 15px 120px;
+    grid-template-rows: 25px;
+    background-color: #1A92D3;
+}
+
+.delete-project {
+    grid-column: 2;
+    grid-row: 1;
+    height: 20px;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+}
+
+.delete-project:hover {
+    /* display: block; */
+    background-color: #1f88c1;
+}
+
+.project-title {
+    grid-column: 3;
+    grid-row: 1;
+    width: 95%;
+    background-color: #1A92D3;
+    color: white;
+    border: none;
+    cursor: default;
+}
+
+.project-title:hover {
+    background-color: #1f88c1;
+}
+
+.project-title:focus {
+    border: none;
+    background-color: #1f88c1;
+    border-radius: 5px;
+    cursor: auto;
+}
+
+
+/* MAIN CONTENT */
+
+.main-content {
+    background-color: #E2E8F0;
+    margin: 10px;
+    grid-column: 2;
+    grid-row: 2;
+    padding-top: 15px;
+    display: grid;
+    grid-template-rows: 0.5fr 6fr 50px;
+    gap: 10px;
+}
+
+.current-project {
+    background-color: rgba(12, 12, 12, 0.2);
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* .task p {
+    font-size: 0.8em;
+} */
+
+/* .links {
+    padding-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+} */
+
+/* .links img {
+    height: 20px;
+    width: 20px;
+    margin: 0 10px;
+} */
+
+/* .links a {
+    margin-right: 8px;
+} */
+
+/* .project-list {
+    margin-left: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+} */
+
+.current-project {
+    grid-row: 1;
+}
+
+/* .project {
+    background-color: #1A92D3;
+    border-radius: 5px;
+    width: 6.5em;
+    text-align: center;
+    margin: 5px;
+    color: #FFFFFF;
+    cursor: default;
+} */
+
+/* Tab container styles */
+.task-list-container {
+    grid-row: 2;
+}
+
+.task-card {
+    box-shadow: 3px 3px rgb(225, 226, 226);
+    border-left: 5px solid #F0B42A;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin: 8px;
+}
+
+.new-task {
+    position: relative;
+    grid-row: 3;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.task-title {
+    margin-left: 12px;
+    padding-left: 30px;
+    width: 95%;
+    height: 70%;
+    border: 1px solid #323638;
+    border-radius: 6px;
+    background-color: #b9e0f3;
+    box-sizing: border-box;
+}
+
+.add-task {
+    background: none;
+    border: none;
+    margin-top: 3px;
+}
+
+.task-icon {
+    position: absolute;
+    left: 10px; /* Adjust position as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Allow clicks to pass through the icon */
+}
+
+.task-icon img {
+    width: 20px;
+    height: 20px;
+}
+
 
 
 /* RIGHT SIDE-BAR */
@@ -159,108 +366,4 @@ a h3 {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-}
-
-
-/* MAIN CONTENT */
-
-.main-content {
-    background-color: #E2E8F0;
-    margin: 10px;
-    grid-column: 2;
-    grid-row: 2;
-    padding-top: 15px;
-    display: grid;
-    grid-template-rows: 0.8fr 50px 2.6fr 50px 40px;
-    gap: 10px;
-}
-
-/* .task p {
-    font-size: 0.8em;
-} */
-
-/* .links {
-    padding-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-} */
-
-/* .links img {
-    height: 20px;
-    width: 20px;
-    margin: 0 10px;
-} */
-
-/* .links a {
-    margin-right: 8px;
-} */
-
-.project-list {
-    grid-row: 1;
-    margin-left: 5px;
-    align-self: baseline;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.current-project {
-    grid-row: 2;
-}
-
-.add-project {
-    width: 1.5em;
-    cursor: pointer;
-    background-color: #1A92D3;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.project {
-    background-color: #1A92D3;
-    border-radius: 5px;
-    width: 6.5em;
-    text-align: center;
-    margin: 5px;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
-/* Tab container styles */
-.task-list-container {
-    grid-row: 3;
-}
-
-/* .task-list {
-    display: none;
-} */
-
-.task-card {
-    box-shadow: 3px 3px rgb(225, 226, 226);
-    border-left: 5px solid #F0B42A;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    margin: 8px;
-}
-
-.new-task {
-    grid-row: 4;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.task-title {
-    margin-left: 10px;
-    width: 65%;
-    height: 70%;
-    border: 1px solid #323638;
-    border-radius: 5px;
-    background-color: #b9e0f3;
 }

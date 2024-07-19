@@ -32,34 +32,46 @@
                 </div>
                 <div class="menu-section-2">
                     <div class="menu-item">
-                        <a href=""><img src="./assets/home.svg" alt="home" />
-                            <h3>Home</h3></a>
+                        <img src="./assets/file-multiple.svg" alt="Project list" />
+                        <h3>Projects</h3>
+                        <button class="add-project"><img src="./assets/plus.svg" title="Add new Project"></button>
                     </div>
-                    <div class="menu-item">
-                        <a href=""><img src="./assets/star.svg" alt="important tasks" />
-                            <h3>Important</h3></a>
+                    <div class="project-list">
+                        <!-- Dynamically add new projects here -->
                     </div>
-                    <div class="menu-item">
-                        <a href=""><img src="./assets/file-multiple.svg" alt="Projects" />
-                            <h3>Projects</h3></a>
+                    <div class="menu-item" id="important-tasks">
+                        <img src="./assets/star.svg" alt="Important tasks" />
+                        <h3>Important</h3>
                     </div>
-                    <div class="menu-item">
-                        <a href=""><img src="./assets/calendar.svg" alt="profile" />
-                            <h3>Calendar</h3></a>
+                    <div class="menu-item" id="all-tasks">
+                        <img src="./assets/star.svg" alt="All tasks" />
+                        <h3>All Tasks</h3>
+                    </div>
+                    <div class="menu-item" id="my-day">
+                        <img src="./assets/calendar.svg" alt="My day" />
+                        <h3>My Day</h3>
+                    </div>
+                    <div class="menu-item" id="my-week">
+                        <img src="./assets/calendar.svg" alt="My week" />
+                        <h3>My Week</h3>
+                    </div>
+                    <div class="menu-item" id="calendar">
+                        <img src="./assets/calendar.svg" alt="Profile" />
+                        <h3>Calendar</h3>
                     </div>
                 </div>
                 <div class="menu-section-3">
                     <div class="menu-item" id="settings">
-                        <a href=""><img src="./assets/cog.svg" alt="communities" />
-                            <h3>Settings</h3></a>
+                        <img src="./assets/cog.svg" alt="Settings" />
+                        <h3>Settings</h3>
                     </div>
                     <div class="menu-item" id="support">
-                        <a href=""><img src="./assets/help-box.svg" alt="communities" />
-                            <h3>Support</h3></a>
+                        <img src="./assets/help-box.svg" alt="Support" />
+                        <h3>Support</h3>
                     </div>
                     <div class="menu-item" id="privacy">
-                        <a href=""><img src="./assets/shield-check.svg" alt="communities" />
-                            <h3>Privacy</h3></a>
+                        <img src="./assets/shield-check.svg" alt="Privacy" />
+                        <h3>Privacy</h3>
                     </div>
                 </div>
             </div>
@@ -68,13 +80,12 @@
  
 
         <section class="main-content">
-            <div class="project-list">
-                <button class="add-project"><img src="./assets/plus.svg" alt="Add new Project"></button>
-            </div>
-            <div class="current-project"><h4></h4></div>
+            <div class="current-project"><h2></h2></div>
             <div class="task-list-container"></div>
             <div class="new-task">
-                <!-- <button class="add-task"><img src="./assets/plus.svg" alt="Add new Task"></button> -->
+                <div class="task-icon">
+                    <button class="add-task"><img src="./assets/plus.svg" alt="Add new Task"></button>
+                </div>
                 <input type="text" class="task-title" placeholder="Add new task">
             </div>
         </section>     <!-- END OF MAIN CONTENT    -->
@@ -82,15 +93,15 @@
 
         <section class="right-sidebar">
 
-            <h4>Upcoming</h4>
+            <h4>Task Title</h4>
             <div class="upcoming">
-                <div><a href="">Site Maintenance</a>
+                <div><a href="">NOTES</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, est, nesciunt ipsa esse deleniti quae a delectus adipisci voluptatum harum quas et voluptatibus! Quia consectetur maxime id reprehenderit, accusamus placeat?</p>
                 </div>
-                <div><a href="">Community Share Day</a>
+                <div><a href="">SUBTASKS</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, est, nesciunt ipsa esse deleniti quae a delectus adipisci voluptatum harum quas et voluptatibus! Quia consectetur maxime id reprehenderit, accusamus placeat?</p>
                 </div>
-                <div><a href="">Updated Privacy Policy</a>
+                <div><a href="">OPTIONS</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, est, nesciunt ipsa esse deleniti quae a delectus adipisci voluptatum harum quas et voluptatibus! Quia consectetur maxime id reprehenderit, accusamus placeat?</p>
                 </div>
             </div>   

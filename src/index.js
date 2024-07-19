@@ -1,25 +1,24 @@
 import "./normalize.css";
-import './styles.css';
-import { loadMainContent } from './MainContent';
+import "./styles.css";
+import { loadDashboard } from "./Dashboard/Dashboard";
+import { loadMainContent } from "./MainContent/MainContent";
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadDashboard();
     loadMainContent();
-    // loadDashboard();
     // loadHeader();
     // loadRightSidebar();
+    // loadFooter();
 });
 
 
-
 // TO DO:
-// - ***** Fix new Project not being made visible *****
-// - Add "completed", "delete task" and "important" buttons to the task card.
-// - Add "delete project" button, visible only when project is hovered
-// - Move "add project" button to the end of the project-list div.
-// - Move "add task" button inside the task-title input field.
-// - Make selected Project change colors or move to current-project header.
+// - Add Tasks to current Project.
+// - Add "completed", "due date" and "important" buttons to the task card.
 // - Add memory using the Web Storage API.
-// - Add real links to the Dashboard (Home, Important, Tasks, Calendar). 
+// - Fix delete.svg issue.
+
+// - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Add calendar to right-sidebar.
 // - Add links Today, Tomorrow and My Week to the Dashboard.
@@ -31,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Make Search functional.
 // - Add tag colors to task card.
 // - Add a 15 project cap.
-// - Optional: Move Project list to the Dashboard.
+// - Optional: When creating a new project, focus on empty input field to rename.
 // - Create a Support page with a contact form.
 // - Create rudimentary Privacy agreement.
+// - Change Fonts.
+// - Create Footer.
