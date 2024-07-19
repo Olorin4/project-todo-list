@@ -3,10 +3,12 @@
 class ProjectList {
     constructor() {
         this.projects = [];    // Array to hold Project instances
+        this.projectCount = 0;
     }
 
     addProject(project) {
         this.projects.push(project);
+        this.projectCount++;
     }
 
     removeProject(id) {
@@ -15,14 +17,15 @@ class ProjectList {
         this.projects.forEach((project, index) => {
             project.id = index + 1;
         });
+        this.projectCount--;
+    }
+
+    get currentProject() {
+        return this.projects.find(project => project.isCurrent);
     }
 
     getProjectById(id) {
         return this.projects.find(project => project.id === id);
-    }
-
-    getCurrentProject() {
-        return this.projects.find(project => project.isCurrent);
     }
 }
 
@@ -33,6 +36,7 @@ class Project {
         this.title = title;
         this.isCurrent = false;
         this.tasks = [];    // Array to hold Task instances
+        this.taskCount = 0;
     }
 
     setCurrent() {
@@ -44,6 +48,7 @@ class Project {
 
     addTask(task) {
         this.tasks.push(task);
+        this.taskCount++;
     }
     removeTask(id) {
         this.tasks = this.tasks.filter(task => task.id !== id);
@@ -51,6 +56,11 @@ class Project {
         this.tasks.forEach((task, index) => {
             task.id = index + 1;
         });
+        this.taskCount--;
+    }
+
+    get currentTask() {
+        return this.tasks.find(task => task.isCurrent);
     }
 
     getTaskById(id) {
@@ -60,15 +70,23 @@ class Project {
 
 
 class Task {
-    constructor(taskId, title, projectId, dueDate = null) {
-        this.id = taskId;
+    constructor(id, title, projectId, dueDate = null) {
+        this.id = id;
         this.title = title;
         this.projectId = projectId;
         this.dueDate = dueDate; 
+        this.isCurrent = false;
         this.isCompleted = false;
         this.isImportant = false;
         this.notes = "";
         this.subtasks = [];
+    }
+
+    setCurrent() {
+        this.isCurrent = true;
+    }
+    unsetCurrent() {
+        this.isCurrent = false;
     }
 
     complete() {

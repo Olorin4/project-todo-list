@@ -2,10 +2,7 @@
 
 import { Project } from "../Objects";
 import { projectList, loadDefaults, setCurrentProject, createProject,
-        removeProject, renameProject, logProjectList } from "./ProjectManager";
-
-
-let projectCount = 0;
+    removeProject, renameProject, logProjectList } from "./ProjectManager";
 
 
 function renderDefaultProjects() {
@@ -15,20 +12,32 @@ function renderDefaultProjects() {
         renderProject(project.id, project.title);
     });
 
-    projectCount = projectList.projects.length;
+    console.log(`projectCount is ${projectList.projectCount}`);
 
-    console.log(`projectCount is ${projectCount}`);
-
+    renderCurrentProject();
     setupAddProjectButton();
+}
+
+
+function renderCurrentProject() {
+    const currentProjectTitle = document.querySelector(".current-project h2");
+
+    if (projectList.currentProject) {
+        currentProjectTitle.textContent = projectList.currentProject.title;
+    } else {
+        currentProjectTitle.textContent = "";
+        console.error("No current project found.");
+    }
 }
 
 
 function setupAddProjectButton() {
     const addBtn = document.querySelector(".add-project").addEventListener("click", () => {
-        projectCount++;
-        createProject(projectCount, `Project ${projectCount}`);
+        const newProjectId = projectList.projectCount + 1;
+        createProject(newProjectId, `Project ${newProjectId}`);
         renderProject();
-        console.log(`projectCount is ${projectCount}`);
+        renderCurrentProject();
+        console.log(`projectCount is ${projectList.projectCount}`);
         logProjectList();
     });
 }
@@ -37,6 +46,10 @@ function setupAddProjectButton() {
 function setupDeleteProjectButton() {
     document.querySelectorAll(".delete-project").forEach((btn) => {
         btn.addEventListener("click", (event) => {
+            if (projectList.projects.length == 1) {
+                return  // Don't delete the last remaining project.
+            }
+
             // Find the nearest ancestor element with the class "project"
             const projectTab = event.target.closest(".project");
             // Extract the id from data-project-id
@@ -44,20 +57,22 @@ function setupDeleteProjectButton() {
             removeProject(projectId);
             projectTab.remove();
 
-            projectCount--;
-            console.log(`projectCount is ${projectCount}`);
+            console.log(`projectCount is ${projectList.projectCount}`);
 
             renderProject();
+            renderCurrentProject();
             logProjectList();
         });
     });
 }
+
 
 function setupInputProperties(id, projectTitle) {
     // Set up event listener for switching tabs:
     projectTitle.addEventListener('click', () => {
         projectTitle.blur();
         setCurrentProject(id);
+        renderCurrentProject();
     });
 
     // Event listener for double-click to make input editable:

@@ -2,7 +2,7 @@
 // renaming and setting as current.
 
 import { ProjectList, Project } from "../Objects";
-import { renderCurrentProject } from "../MainContent/MainContent";
+
 
 
 const projectList = new ProjectList();
@@ -30,18 +30,17 @@ function loadDefaults() {
 
 
 function setCurrentProject(id) {
-    const projectToSet = projectList.getProjectById(id);
+    const projectToSetAsCurrent = projectList.getProjectById(id);
 
-    if (!projectToSet) {
+    if (!projectToSetAsCurrent) {
         console.error(`Project with ID ${id} not found.`);
         return;
     }
 
-    if (projectToSet.isCurrent) {
+    if (projectToSetAsCurrent.isCurrent) {
         return; // No need to update if already current
     }
 
-    console.log(`Setting project ${id} as current`);
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
@@ -49,12 +48,9 @@ function setCurrentProject(id) {
     });
 
     // Set current-project status for the specified project
-    projectToSet.setCurrent();
-
-    // Update UI to reflect current project
-    renderCurrentProject();
+    projectToSetAsCurrent.setCurrent();
     
-    console.log("Current project set:", projectToSet);
+    console.log("Current project set:", projectToSetAsCurrent);
 }
 
 
@@ -76,11 +72,9 @@ function removeProject(id) {
     
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
-    if (!projectToRemove.isCurrent || projectList.projects.length <= 0) {
-        renderCurrentProject();
-        return
-    } else if (projectToRemove.isCurrent && projectToRemove.id == projectList.projects.length+1) {
-        setCurrentProject(id-1);
+    if (!projectToRemove.isCurrent || projectList.projectCount == 0) { return }
+    else if (projectToRemove.isCurrent && projectToRemove.id == projectList.projectCount+1) {
+        setCurrentProject(id - 1);
     } else {
         setCurrentProject(id);
     }
@@ -90,7 +84,6 @@ function removeProject(id) {
 function renameProject(id, newTitle) {
     const projectToRename = projectList.getProjectById(id);
     projectToRename.title = newTitle;
-    renderCurrentProject();
     console.log(`Project with ID ${id} renamed to ${newTitle}.`);
     logProjectList();
 }
