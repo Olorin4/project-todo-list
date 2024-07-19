@@ -17,11 +17,9 @@ function setCurrentTask(id) {
         console.error(`Task with ID ${id} not found.`);
         return;
     }
-
     if (taskToSetAsCurrent.isCurrent) {
         return; // No need to update if already current
     }
-
 
     // Unset current-task status for all tasks in the project
     currentProject.tasks.forEach(task => {
@@ -31,7 +29,7 @@ function setCurrentTask(id) {
     // Set current-task status for the specified task
     taskToSetAsCurrent.isCurrent = true;
     
-    console.log("Current task set:", taskToSetAsCurrent);
+    console.log(`Current task set: ${taskToSetAsCurrent.title} (ID: ${id})`);
 }
 
 
@@ -45,7 +43,7 @@ function createTask(id, title) {
     const newTask = new Task(id, title, currentProject.id);
     currentProject.addTask(newTask);
 
-    console.log(`Task with ID ${id} created.`);
+    console.log(`Task ${title} with ID ${id} created, under project ${currentProject.title}.`);
 
     setCurrentTask(id);
 }

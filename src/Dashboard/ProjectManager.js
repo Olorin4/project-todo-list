@@ -50,7 +50,7 @@ function setCurrentProject(id) {
     // Set current-project status for the specified project
     projectToSetAsCurrent.isCurrent = true;
     
-    console.log("Current project set:", projectToSetAsCurrent);
+    console.log(`Current project set: ${projectToSetAsCurrent.title} (ID: ${id})`);
 }
 
 
@@ -58,7 +58,7 @@ function createProject(id, title) {
     const newProject = new Project(id, title);
     projectList.addProject(newProject);
 
-    console.log(`Project with ID ${id} created.`);
+    console.log(`Project ${title} with ID ${id} created.`);
 
     setCurrentProject(id);
 }

@@ -1,6 +1,7 @@
 // ProjectRenderer.js handles DOM manipulation of the Projects menu item.
 
 import { Project } from "../Objects";
+import { renderTasks } from "../MainContent/TaskRenderer";
 import { projectList, loadDefaults, setCurrentProject, createProject,
     deleteProject, renameProject, logProjectList } from "./ProjectManager";
 
@@ -9,7 +10,7 @@ function renderDefaultProjects() {
     loadDefaults();
 
     projectList.projects.forEach(project => {
-        renderProject(project.id, project.title);
+        renderProjects(project.id, project.title);
     });
 
     console.log(`projectCount is ${projectList.projectCount}`);
@@ -24,6 +25,7 @@ function renderCurrentProject() {
 
     if (projectList.currentProject) {
         currentProjectTitle.textContent = projectList.currentProject.title;
+        renderTasks();
     } else {
         currentProjectTitle.textContent = "";
         console.error("No current project found.");
@@ -35,7 +37,7 @@ function setupAddProjectButton() {
     const addBtn = document.querySelector(".add-project").addEventListener("click", () => {
         const newProjectId = projectList.projectCount + 1;
         createProject(newProjectId, `Project ${newProjectId}`);
-        renderProject();
+        renderProjects();
         renderCurrentProject();
         console.log(`projectCount is ${projectList.projectCount}`);
         logProjectList();
@@ -59,7 +61,7 @@ function setupDeleteProjectButton() {
 
             console.log(`projectCount is ${projectList.projectCount}`);
 
-            renderProject();
+            renderProjects();
             renderCurrentProject();
             logProjectList();
         });
@@ -100,7 +102,7 @@ function setupInputProperties(id, projectTitle) {
 }
 
 
-function renderProject() {
+function renderProjects() {
     const projectsCard = document.querySelector(".project-list");
     projectsCard.innerHTML = "";
 
@@ -126,4 +128,4 @@ function renderProject() {
 }
 
 
-export { renderDefaultProjects, logProjectList };
+export { renderDefaultProjects, renderCurrentProject, logProjectList };
