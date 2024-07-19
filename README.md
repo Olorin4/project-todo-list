@@ -1,5 +1,4 @@
 # project-todo-list
-### Detailed Project Description
 
 **Project Title**: Advanced To-Do List Application
 
