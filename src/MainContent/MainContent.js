@@ -1,7 +1,7 @@
 // MainContent.js handles all DOM manipulation of the main-content section.
 import { projectList, setCurrentProject } from "../Dashboard/ProjectManager";
 import { renderCurrentProject } from "../Dashboard/ProjectRenderer";
-import { createTask, removeTask, logTaskList } from "./TaskManager";
+import { createTask, removeTask, toggleCompletedStatus, logTaskList } from "./TaskManager";
 import { setupAddTask } from "./TaskRenderer";
 
 
@@ -21,6 +21,7 @@ export function loadMainContent() {
     // removeTask(projectList.currentProject.taskCount, 3);
     // setCurrentProject(1);
     renderCurrentProject();
+    toggleCompletedStatus(1)
 
-    // logTaskList();
+    logTaskList();
 }

@@ -270,7 +270,6 @@ h2 {
 }
 
 .task-links {
-    
     cursor: pointer;
 }
 
@@ -278,6 +277,9 @@ span:active {
     border: none;
 }
 
+.completed-task {
+    text-decoration: line-through;
+}
 
 .new-task-wrapper {
     position: relative;

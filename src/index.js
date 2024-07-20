@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Add "completed", "due date" and "important" buttons to the task card.
+// - Make "completed", "due date" and "important" buttons functional.
 // - Add memory using the Web Storage API.
-// - Fix delete.svg issue.
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Consider moving ProjectManager.js functions into class methods.
 
@@ -31,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Make Search functional.
 // - Add tag colors to task card.
 // - Add a 15 project cap.
+// - Add "drag and drop" functionality to projects and tasks.
 // - Optional: When creating a new project, focus on empty input field to rename.
 // - Create a Support page with a contact form.
 // - Create rudimentary Privacy agreement.

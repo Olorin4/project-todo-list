@@ -61,12 +61,10 @@ function removeTask(taskId, projectId) {
 }
 
 
-function markTaskAsCompleted(id) {
+function toggleCompletedStatus(id) {
     const currentProject = projectList.currentProject;
-    if (!currentProject) {
-        console.error("No current project selected.");
-        return;
-    }
+    console.log(`Current Project: ${currentProject.title}`);
+    console.log(`Tasks in Current Project:`, currentProject.tasks);
 
     const task = currentProject.getTaskById(id);
     if (!task) {
@@ -74,7 +72,7 @@ function markTaskAsCompleted(id) {
         return;
     }
 
-    task.isCompleted = true;
+    task.isCompleted = !task.isCompleted;
     console.log(`Task with ID ${id} marked as completed.`);
 }
 
@@ -128,5 +126,5 @@ function logTaskList() {
 }
 
 
-export { createTask, removeTask, markTaskAsCompleted,
+export { createTask, removeTask, toggleCompletedStatus,
     markTaskAsImportant, setTaskDueDate, logTaskList };
