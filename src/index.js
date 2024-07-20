@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Add Tasks to current Project.
 // - Add "completed", "due date" and "important" buttons to the task card.
 // - Add memory using the Web Storage API.
 // - Fix delete.svg issue.
+// - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Consider moving ProjectManager.js functions into class methods.
 
+// - Replace input fields with editable divs.
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
-// - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Add calendar to right-sidebar.
 // - Add links Today, Tomorrow and My Week to the Dashboard.
 // - Add ability to move tasks to different projects.
@@ -36,3 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // - Create rudimentary Privacy agreement.
 // - Change Fonts.
 // - Create Footer.
+// - Add Favicon.

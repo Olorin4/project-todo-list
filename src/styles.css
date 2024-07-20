@@ -1,8 +1,9 @@
 body {
     display: grid;
-    grid-template-columns: 1fr 3fr 1.1fr;
+    grid-template-columns: 1fr 2.3fr 2.3fr;
     grid-template-rows: 80px 805px;
 }
+
 
 
 /* HEADER */
@@ -52,16 +53,10 @@ header p {
     font-size: 0.8em;
 }
 
-/* .nav-bar-2 {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 25px 0;
-} */
-
 .user-info {
     margin-right: auto;
 }
+
 
 
 /* DASHBOARD */
@@ -206,6 +201,7 @@ h3 {
 }
 
 
+
 /* MAIN CONTENT */
 
 .main-content {
@@ -228,65 +224,61 @@ h2 {
     text-align: center;
 }
 
-/* .task p {
-    font-size: 0.8em;
-} */
-
-/* .links {
-    padding-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-} */
-
-/* .links img {
-    height: 20px;
-    width: 20px;
-    margin: 0 10px;
-} */
-
-/* .links a {
-    margin-right: 8px;
-} */
-
-/* .project-list {
-    margin-left: 5px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
-} */
-
 .current-project {
     grid-row: 1;
 }
 
-/* .project {
-    background-color: #1A92D3;
-    border-radius: 5px;
-    width: 6.5em;
-    text-align: center;
-    margin: 5px;
-    color: #FFFFFF;
-    cursor: default;
-} */
-
-/* Tab container styles */
 .task-list-container {
     grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .task-card {
+    height: 50px;
+    width: 90%;
     box-shadow: 3px 3px rgb(225, 226, 226);
     border-left: 5px solid #F0B42A;
     border-radius: 5px;
     background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    margin: 8px;
+    display: grid;
+    grid-template-columns: 0.5fr 8fr 2fr ;
+    grid-template-rows: 1;
+    justify-content: center;
+    align-content: center;
 }
 
-.new-task {
+.task-card span {
+    grid-column: 2;
+    height: 90%;
+    width: 100%;
+    font-size: 1em;
+    cursor: default;
+}
+
+.task-links-container {
+    grid-column: 3;
+    height: 90%;
+    /* padding-top: 15px; */
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.task-links {
+    
+    cursor: pointer;
+}
+
+span:active {
+    border: none;
+}
+
+
+.new-task-wrapper {
     position: relative;
     grid-row: 3;
     display: flex;
@@ -305,18 +297,18 @@ h2 {
     box-sizing: border-box;
 }
 
-.add-task {
-    background: none;
-    border: none;
-    margin-top: 3px;
-}
-
-.task-icon {
+.add-task-icon-wrapper {
     position: absolute;
     left: 10px; /* Adjust position as needed */
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none; /* Allow clicks to pass through the icon */
+}
+
+.add-task-icon {
+    background: none;
+    border: none;
+    margin-top: 3px;
 }
 
 .task-icon img {

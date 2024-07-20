@@ -12,7 +12,7 @@ export function loadMainContent() {
 
 
     // Debugging:
-    // createTask((projectList.currentProject.taskCount+1), "Example Task 1");
+    createTask((projectList.currentProject.taskCount+1), "Example Task 1");
     // setCurrentProject(2);
     // createTask((projectList.currentProject.taskCount+1), "Example Task 2");
     // setCurrentProject(3);
@@ -20,7 +20,7 @@ export function loadMainContent() {
     // createTask((projectList.currentProject.taskCount+1), "Example Task 4");
     // removeTask(projectList.currentProject.taskCount, 3);
     // setCurrentProject(1);
-    // renderCurrentProject();
+    renderCurrentProject();
 
     // logTaskList();
 }
