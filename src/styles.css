@@ -239,6 +239,7 @@ h2 {
 .task-card {
     height: 50px;
     width: 90%;
+    margin-top: 5px;
     box-shadow: 3px 3px rgb(225, 226, 226);
     border-left: 5px solid #F0B42A;
     border-radius: 5px;
@@ -261,7 +262,7 @@ h2 {
 .task-links-container {
     grid-column: 3;
     height: 90%;
-    /* padding-top: 15px; */
+    margin-right: 10px;
     display: flex;
     justify-self: center;
     align-items: center;
