@@ -1,5 +1,5 @@
 // TaskLinkRenderer.js handles UI logic of all links inside the Task Card.
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import starImg from '../assets/star-plus-outline.svg';
 import starImgYellow from '../assets/star-plus-outline-yellow.svg';
 import completedImg from "../assets/completed.svg";
@@ -46,7 +46,7 @@ export function renderTaskIcons(taskCard) {
     dateInput.type = 'date';
     dateInput.id = "due-date-input";
     iconsContainer.appendChild(dateInput);
-    setupDueDateLink(dateLink);
+    setupDueDateLink(dateLink, dateInput);
 }
 
 
@@ -96,21 +96,26 @@ function setupImportantLink(importantLink) {
     });
 }
 
+
 function setupDueDateLink(dateLink, dateInput) {
     dateLink.addEventListener("click", event => {
-        dateInput.style.display = 'block'; // Show the date input
+        const taskId = parseInt(dateLink.parentElement.parentElement.dataset.taskId, 10);
+        dateInput.style.display = 'block'; // Show the date picker
         dateInput.focus();
 
-        dateInput.addEventListener('change', () => {
-            const taskId = parseInt(dateLink.parentElement.id);
-            const selectedDate = dateInput.value;
-            const formattedDate = format(new Date(selectedDate), 'yyyy-MM-dd');
+        const handleDateInput = () => {
+            const parsedDate = parseISO(dateInput.value);
+            const formattedDate = format(parsedDate, 'yyyy-MM-dd');
             setTaskDueDate(taskId, formattedDate);
             dateInput.style.display = 'none'; // Hide the date input after selection
-        });
+        };
 
-        dateInput.addEventListener('blur', () => {
-            dateInput.style.display = 'none'; // Hide the date input if it loses focus
+        dateInput.addEventListener('blur', handleDateInput);
+
+        dateInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                handleDateInput();
+            }
         });
     });    
 }

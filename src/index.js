@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Setting due date doesn't work properly.
 // - Add memory using the Web Storage API.
 // - Make delete-project button visible only on hover.
 // - Add task details, notes, subtasks, etc to the right-sidebar.
