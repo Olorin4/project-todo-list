@@ -21,7 +21,6 @@ export function loadMainContent() {
     // removeTask(projectList.currentProject.taskCount, 3);
     // setCurrentProject(1);
     renderCurrentProject();
-    toggleCompletedStatus(1)
 
     logTaskList();
 }

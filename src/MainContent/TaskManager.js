@@ -77,12 +77,10 @@ function toggleCompletedStatus(id) {
 }
 
 
-function markTaskAsImportant(id) {
+function toggleImportantStatus(id) {
     const currentProject = projectList.currentProject;
-    if (!currentProject) {
-        console.error("No current project selected.");
-        return;
-    }
+    console.log(`Current Project: ${currentProject.title}`);
+    console.log(`Tasks in Current Project:`, currentProject.tasks);
 
     const task = currentProject.getTaskById(id);
     if (!task) {
@@ -90,7 +88,7 @@ function markTaskAsImportant(id) {
         return;
     }
 
-    task.isImportant = true;
+    task.isImportant = !task.isImportant;
     console.log(`Task with ID ${id} marked as important.`);
 }
 
@@ -127,4 +125,4 @@ function logTaskList() {
 
 
 export { createTask, removeTask, toggleCompletedStatus,
-    markTaskAsImportant, setTaskDueDate, logTaskList };
+    toggleImportantStatus, setTaskDueDate, logTaskList };

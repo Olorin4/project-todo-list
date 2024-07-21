@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Make "completed", "due date" and "important" buttons functional.
+// - Make "due date" buttons functional.
 // - Add memory using the Web Storage API.
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 // - Consider moving ProjectManager.js functions into class methods.
