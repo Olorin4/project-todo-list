@@ -164,6 +164,7 @@ h3 {
     grid-column: 2;
     grid-row: 1;
     height: 20px;
+    margin-top: 4px;
     cursor: pointer;
     background-color: #1A92D3;
     border: none;
@@ -178,6 +179,15 @@ h3 {
     /* display: block; */
     background-color: #1f88c1;
 }
+
+/* .delete-project img {
+    display: none;
+}
+
+.delete-project img:hover {
+    display: block;
+} */
+
 
 .project-title {
     grid-column: 3;
@@ -236,6 +246,7 @@ h2 {
     align-items: center;
 }
 
+/* Task Card */
 .task-card {
     height: 50px;
     width: 90%;
@@ -248,7 +259,8 @@ h2 {
     grid-template-columns: 0.5fr 8fr 2fr ;
     grid-template-rows: 1;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .task-card input {
@@ -260,28 +272,44 @@ h2 {
     cursor: default;
 }
 
-.task-links-container {
+.task-icons-container {
     grid-column: 3;
     height: 90%;
+    margin-top: 3px;
     margin-right: 10px;
     display: flex;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
 }
 
-.task-links {
+.task-icons {
     cursor: pointer;
-}
-
-input:active {
-    border: none;
+    height: 20px;
 }
 
 .completed-task {
     text-decoration: line-through;
 }
 
+#due-date-input {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 182px;
+    left: 485px;
+    z-index: 1000; /* Ensure it appears above other elements */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100px; 
+    height: 20px; 
+    font-size: 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Add Task input field */
 .new-task-wrapper {
     position: relative;
     grid-row: 3;
@@ -313,11 +341,6 @@ input:active {
     background: none;
     border: none;
     margin-top: 3px;
-}
-
-.task-icon img {
-    width: 20px;
-    height: 20px;
 }
 
 

@@ -1,5 +1,6 @@
 // ProjectRenderer.js handles DOM manipulation of the Projects menu item.
 
+import deleteSVG from "../assets/delete.svg";
 import { Project } from "../Objects";
 import { renderTasks } from "../MainContent/TaskRenderer";
 import { projectList, loadDefaults, setCurrentProject, createProject,
@@ -123,7 +124,13 @@ function renderProjects() {
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-project");
         projectTab.appendChild(deleteBtn);
+        const deleteSvg = document.createElement("img");
+        deleteSvg.src = deleteSVG;
+        deleteSvg.alt = "Delete project";
+        deleteSvg.title = "Delete project";
+        deleteBtn.appendChild(deleteSvg);
     });
+
     setupDeleteProjectButton();
 }
 

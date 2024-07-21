@@ -13,12 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Make "due date" buttons functional.
+// - Setting due date doesn't work properly.
 // - Add memory using the Web Storage API.
+// - Make delete-project button visible only on hover.
 // - Add task details, notes, subtasks, etc to the right-sidebar.
-// - Consider moving ProjectManager.js functions into class methods.
 
-// - Replace input fields with editable divs.
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add calendar to right-sidebar.
 // - Add links Today, Tomorrow and My Week to the Dashboard.

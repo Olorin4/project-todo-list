@@ -44,19 +44,20 @@ function createTask(id, title) {
     currentProject.addTask(newTask);
 
     console.log(`Task ${title} with ID ${id} created, under project ${currentProject.title}.`);
-
+    logTaskList();
     setCurrentTask(id);
+
 }
 
 
 function removeTask(taskId, projectId) {
-    const project = projectList.getProjectById(projectId);
-    if (!project) {
+    const currentProject = projectList.currentProject;
+    if (!currentProject) {
         console.error(`Project with ID ${projectId} not found.`);
         return;
     }
-    project.removeTask(taskId);
-    
+    currentProject.removeTask(taskId);
+    logTaskList();
     console.log(`Task removed: ID ${taskId} from project ${projectId}`);
 }
 
@@ -89,25 +90,18 @@ function toggleImportantStatus(id) {
     }
 
     task.isImportant = !task.isImportant;
-    console.log(`Task with ID ${id} marked as important.`);
+    console.log(`Task with ID ${id} marked as ${task.isImportant}.`);
 }
 
 
 function setTaskDueDate(id, dueDate) {
-    const currentProject = projectList.currentProject;
-    if (!currentProject) {
-        console.error("No current project selected.");
-        return;
-    }
-
-    const task = currentProject.getTaskById(id);
+    const task = projectList.currentProject.getTaskById(id);
     if (!task) {
         console.error(`Task with ID ${id} not found.`);
         return;
     }
-
-    task.setDueDate(dueDate);
-    console.log(`Due date set for task with ID ${id}.`);
+    task.dueDate = dueDate;
+    console.log(`Task with ID ${id} due date set to ${dueDate}`);
 }
 
 
@@ -122,6 +116,8 @@ function logTaskList() {
         });
     });
 }
+
+window.logTaskList = logTaskList;
 
 
 export { createTask, removeTask, toggleCompletedStatus,
