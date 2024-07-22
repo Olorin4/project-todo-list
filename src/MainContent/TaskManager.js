@@ -2,6 +2,7 @@
 // and altering properties of tasks.
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
+import { save } from "../Dashboard/ProjectSaver";
 
 
 function setCurrentTask(id) {
@@ -30,6 +31,8 @@ function setCurrentTask(id) {
     taskToSetAsCurrent.isCurrent = true;
     
     console.log(`Current task set: ${taskToSetAsCurrent.title} (ID: ${id})`);
+
+    save(projectList)
 }
 
 
@@ -44,9 +47,9 @@ function createTask(id, title) {
     currentProject.addTask(newTask);
 
     console.log(`Task ${title} with ID ${id} created, under project ${currentProject.title}.`);
+    
     logTaskList();
     setCurrentTask(id);
-
 }
 
 
@@ -59,6 +62,8 @@ function removeTask(taskId, projectId) {
     currentProject.removeTask(taskId);
     logTaskList();
     console.log(`Task removed: ID ${taskId} from project ${projectId}`);
+
+    save(projectList);
 }
 
 
@@ -75,6 +80,8 @@ function toggleCompletedStatus(id) {
 
     task.isCompleted = !task.isCompleted;
     console.log(`Task with ID ${id} marked as completed.`);
+
+    save(projectList);
 }
 
 
@@ -91,6 +98,8 @@ function toggleImportantStatus(id) {
 
     task.isImportant = !task.isImportant;
     console.log(`Task with ID ${id} marked as ${task.isImportant}.`);
+
+    save(projectList);
 }
 
 
@@ -102,6 +111,8 @@ function setTaskDueDate(id, dueDate) {
     }
     task.dueDate = dueDate;
     console.log(`Task with ID ${id} due date set to ${dueDate}`);
+
+    save(projectList);
 }
 
 

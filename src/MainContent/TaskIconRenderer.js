@@ -9,6 +9,7 @@ import { projectList } from "../Dashboard/ProjectManager";
 import { createTask, removeTask, toggleCompletedStatus, toggleImportantStatus,
         setTaskDueDate, logTaskList } from "./TaskManager";
 import { renderTasks } from "./TaskRenderer";
+import { save } from "../Dashboard/ProjectSaver";
 
 
 export function renderTaskIcons(taskCard) {
@@ -85,7 +86,7 @@ function setupImportantIcon(importantIcon) {
             importantIcon.src = starImg;
             importantIcon.title = "Mark as important";
         }
-        
+        // save();
         logTaskList();
     });
 }

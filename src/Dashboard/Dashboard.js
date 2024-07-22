@@ -1,17 +1,15 @@
 // Dashboard.js handles UI logic of the dashboard section.
-
-import { renderDefaultProjects, logProjectList } from "./ProjectRenderer";
+import { initializeProjectList } from "./ProjectManager";
+import { renderProjects, setupAddProjectButton } from "./ProjectRenderer";
 
 
 export function loadDashboard() {
-    renderDefaultProjects();
-    console.log("Main content loaded with defaults");
-
-
+    setupAddProjectButton();
+    initializeProjectList();
+    renderProjects();
 
     // Experimental:
     
-    
     // Debugging:
-    logProjectList();
+
 }

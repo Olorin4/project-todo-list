@@ -1,16 +1,26 @@
 // ProjectManager.js handles all project logic: creating, deleting
 // renaming and setting as current.
-
+import { loadSavedProjectList, save } from "./ProjectSaver";
 import { ProjectList, Project } from "../Objects";
 
 
+let projectList;
 
-const projectList = new ProjectList();
+function initializeProjectList() {
+    const serializedData = localStorage.getItem('projectList');
+    if (serializedData) {
+        projectList = loadSavedProjectList(serializedData);
+    } else {
+        loadDefaults(); // Load defaults if no data is found
+    }
+    save(projectList);
+    return projectList;
+}
 
 
 function loadDefaults() {
-    console.log("Creating projects...");
-    
+    console.log("Creating a new default projectList...");
+    projectList = new ProjectList();
     const defaultProjects = [
         new Project(1, "Personal"),
         new Project(2, "Work"),
@@ -36,21 +46,20 @@ function setCurrentProject(id) {
         console.error(`Project with ID ${id} not found.`);
         return;
     }
-
     if (projectToSetAsCurrent.isCurrent) {
         return; // No need to update if already current
     }
-
 
     // Unset current-project status for all projects in the projectList object
     projectList.projects.forEach(proj => {
         proj.isCurrent = false;
     });
-
     // Set current-project status for the specified project
     projectToSetAsCurrent.isCurrent = true;
     
     console.log(`Current project set: ${projectToSetAsCurrent.title} (ID: ${id})`);
+
+    save(projectList);
 }
 
 
@@ -69,7 +78,7 @@ function deleteProject(id) {
 
     // Remove the project from projectList
     projectList.removeProject(id);
-    
+    save(projectList);
     console.log(`Project removed: ${projectToRemove.title} (ID: ${id})`);
 
     if (!projectToRemove.isCurrent || projectList.projectCount == 0) { return }
@@ -77,7 +86,7 @@ function deleteProject(id) {
         setCurrentProject(id - 1);
     } else {
         setCurrentProject(id);
-    }
+    } 
 }
     
 
@@ -85,6 +94,7 @@ function renameProject(id, newTitle) {
     const projectToRename = projectList.getProjectById(id);
     projectToRename.title = newTitle;
     console.log(`Project with ID ${id} renamed to ${newTitle}.`);
+    save(projectList);
     logProjectList();
 }
 
@@ -94,7 +104,8 @@ function logProjectList() {
     console.log("Project List:", projectList.projects);
 }
 
+
 export {
-    projectList, loadDefaults, setCurrentProject,
+    projectList, initializeProjectList, setCurrentProject,
     createProject, deleteProject, renameProject, logProjectList
 };

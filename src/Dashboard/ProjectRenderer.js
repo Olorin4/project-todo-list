@@ -1,36 +1,53 @@
 // ProjectRenderer.js handles DOM manipulation of the Projects menu item.
-
 import deleteSVG from "../assets/delete.svg";
 import { Project } from "../Objects";
-import { renderTasks } from "../MainContent/TaskRenderer";
-import { projectList, loadDefaults, setCurrentProject, createProject,
+import { renderCurrentProject, renderTasks } from "../MainContent/TaskRenderer";
+import { projectList, setCurrentProject, createProject,
     deleteProject, renameProject, logProjectList } from "./ProjectManager";
 
 
-function renderDefaultProjects() {
-    loadDefaults();
+// function renderDefaultProjects() {
+//     loadDefaults();
+
+//     projectList.projects.forEach(project => {
+//         renderProjects(project.id, project.title);
+//     });
+
+//     console.log(`projectCount is ${projectList.projectCount}`);
+
+//     renderCurrentProject();
+//     setupAddProjectButton();
+// }
+
+
+function renderProjects() {
+    const projectsCard = document.querySelector(".project-list");
+    projectsCard.innerHTML = "";
 
     projectList.projects.forEach(project => {
-        renderProjects(project.id, project.title);
+        const projectTab = document.createElement("div");
+        projectTab.classList.add("project");
+        projectTab.dataset.projectId = project.id; // Set data-project-id attribute
+        projectsCard.appendChild(projectTab);
+
+        const projectTitle = document.createElement("input");
+        projectTitle.value = project.title;
+        projectTitle.type = 'text';
+        projectTitle.classList.add('project-title');
+        projectTitle.readOnly = true;
+        projectTab.appendChild(projectTitle);
+        setupInputProperties(project.id, projectTitle)
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-project");
+        projectTab.appendChild(deleteBtn);
+        const deleteSvg = document.createElement("img");
+        deleteSvg.src = deleteSVG;
+        deleteSvg.alt = "Delete project";
+        deleteSvg.title = "Delete project";
+        deleteBtn.appendChild(deleteSvg);
     });
-
-    console.log(`projectCount is ${projectList.projectCount}`);
-
-    renderCurrentProject();
-    setupAddProjectButton();
-}
-
-
-function renderCurrentProject() {
-    const currentProjectTitle = document.querySelector(".current-project h2");
-
-    if (projectList.currentProject) {
-        currentProjectTitle.textContent = projectList.currentProject.title;
-        renderTasks();
-    } else {
-        currentProjectTitle.textContent = "";
-        console.error("No current project found.");
-    }
+    setupDeleteProjectButton();
 }
 
 
@@ -103,36 +120,4 @@ function setupInputProperties(id, projectTitle) {
 }
 
 
-function renderProjects() {
-    const projectsCard = document.querySelector(".project-list");
-    projectsCard.innerHTML = "";
-
-    projectList.projects.forEach(project => {
-        const projectTab = document.createElement("div");
-        projectTab.classList.add("project");
-        projectTab.dataset.projectId = project.id; // Set data-project-id attribute
-        projectsCard.appendChild(projectTab);
-
-        const projectTitle = document.createElement("input");
-        projectTitle.value = project.title;
-        projectTitle.type = 'text';
-        projectTitle.classList.add('project-title');
-        projectTitle.readOnly = true;
-        projectTab.appendChild(projectTitle);
-        setupInputProperties(project.id, projectTitle)
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete-project");
-        projectTab.appendChild(deleteBtn);
-        const deleteSvg = document.createElement("img");
-        deleteSvg.src = deleteSVG;
-        deleteSvg.alt = "Delete project";
-        deleteSvg.title = "Delete project";
-        deleteBtn.appendChild(deleteSvg);
-    });
-
-    setupDeleteProjectButton();
-}
-
-
-export { renderDefaultProjects, renderCurrentProject, logProjectList };
+export { renderProjects, setupAddProjectButton };

@@ -1,4 +1,4 @@
-// Objects.js establishes main objects.
+// Objects.js establishes main classes.
 
 class ProjectList {
     constructor() {
@@ -10,7 +10,6 @@ class ProjectList {
         this.projects.push(project);
         this.projectCount++;
     }
-
     removeProject(id) {
         this.projects = this.projects.filter(project => project.id !== id);
         // After removing, update the IDs of remaining projects
@@ -74,10 +73,10 @@ class Task {
         this.id = id;
         this.title = title;
         this.projectId = projectId;
-        this.dueDate = undefined; 
-        this._isCurrent = false;
         this._isCompleted = false;
         this._isImportant = false;
+        this.dueDate = undefined; 
+        this._isCurrent = false;
         this.notes = "";
         this.subtasks = [];
         this.subtasksCount = this.subtasks.length;

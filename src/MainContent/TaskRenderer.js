@@ -6,6 +6,19 @@ import { renderTaskIcons } from './TaskIconRenderer';
 import { createTask, removeTask } from "./TaskManager";
     
 
+function renderCurrentProject() {
+    const currentProjectTitle = document.querySelector(".current-project h2");
+
+    if (projectList.currentProject) {
+        currentProjectTitle.textContent = projectList.currentProject.title;
+        renderTasks();
+    } else {
+        currentProjectTitle.textContent = "";
+        console.error("No current project found.");
+    }
+}
+
+
 function renderTasks() {
     const taskListContainer = document.querySelector(".task-list-container");
     taskListContainer.innerHTML = ""; // Clear any existing tasks
@@ -86,4 +99,4 @@ function setupInputProperties(id, taskTitle) {
 }
 
 
-export { renderTasks, setupAddTask };
+export { renderCurrentProject, renderTasks, setupAddTask };
