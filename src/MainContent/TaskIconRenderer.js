@@ -17,13 +17,15 @@ export function renderTaskIcons(taskCard) {
     iconsContainer.classList.add("task-icons-container");
     taskCard.appendChild(iconsContainer);
 
-    renderCompletedIcon(iconsContainer);
-    renderImportantIcon(iconsContainer);
-    renderDueDateIcon(iconsContainer);
+    const taskId = parseInt(iconsContainer.parentElement.dataset.taskId);
+
+    renderCompletedIcon(iconsContainer, taskId);
+    renderImportantIcon(iconsContainer, taskId);
+    renderDueDateIcon(iconsContainer, taskId);
 }
 
 
-function renderCompletedIcon(iconsContainer) {
+function renderCompletedIcon(iconsContainer, taskId) {
     const completedIcon = document.createElement("img");
     completedIcon.classList.add("task-icons");
     completedIcon.id = "link-2";
@@ -31,14 +33,12 @@ function renderCompletedIcon(iconsContainer) {
     completedIcon.alt = "Mark as completed";
     completedIcon.title = "Mark as completed";
     iconsContainer.appendChild(completedIcon);
-    setupCompletedIcon(completedIcon);
+    setupCompletedIcon(completedIcon, taskId);
 }
 
-function setupCompletedIcon(completedIcon) {
+function setupCompletedIcon(completedIcon, taskId) {
     completedIcon.addEventListener("click", event => {
-        const taskId = parseInt(completedIcon.parentElement.parentElement.dataset.taskId);
         const task = projectList.currentProject.getTaskById(taskId);
-        
         toggleCompletedStatus(taskId);
         removeTask(taskId, projectList.currentProject.id);
         
@@ -58,20 +58,20 @@ function setupCompletedIcon(completedIcon) {
 }
 
 
-function renderImportantIcon(iconsContainer) {
+function renderImportantIcon(iconsContainer, taskId) {
     const importantIcon = document.createElement("img");
+    const task = projectList.currentProject.getTaskById(taskId);
     importantIcon.classList.add("task-icons");
     importantIcon.id = "link-3";
-    importantIcon.src = starImg;
-    importantIcon.alt = "Mark as important";
-    importantIcon.title = "Mark as important";
+    importantIcon.src = task.isImportant ? starImgYellow : starImg;
+    importantIcon.alt = task.isImportant ? "Mark as not important" : "Mark as important";
+    importantIcon.title = task.isImportant ? "Mark as not important" : "Mark as important";
     iconsContainer.appendChild(importantIcon);
-    setupImportantIcon(importantIcon);
+    setupImportantIcon(importantIcon, taskId);
 }
 
-function setupImportantIcon(importantIcon) {
+function setupImportantIcon(importantIcon, taskId) {
     importantIcon.addEventListener("click", event => {
-        const taskId = parseInt(importantIcon.parentElement.parentElement.dataset.taskId);
         const task = projectList.currentProject.getTaskById(taskId);
 
         toggleImportantStatus(taskId);
