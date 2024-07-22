@@ -6,20 +6,6 @@ import { projectList, setCurrentProject, createProject,
     deleteProject, renameProject, logProjectList } from "./ProjectManager";
 
 
-// function renderDefaultProjects() {
-//     loadDefaults();
-
-//     projectList.projects.forEach(project => {
-//         renderProjects(project.id, project.title);
-//     });
-
-//     console.log(`projectCount is ${projectList.projectCount}`);
-
-//     renderCurrentProject();
-//     setupAddProjectButton();
-// }
-
-
 function renderProjects() {
     const projectsCard = document.querySelector(".project-list");
     projectsCard.innerHTML = "";

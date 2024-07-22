@@ -131,5 +131,5 @@ function logTaskList() {
 window.logTaskList = logTaskList;
 
 
-export { createTask, removeTask, toggleCompletedStatus,
+export { setCurrentTask, createTask, removeTask, toggleCompletedStatus,
     toggleImportantStatus, setTaskDueDate, logTaskList };

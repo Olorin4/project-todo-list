@@ -49,11 +49,16 @@ h2 {
     gap: 5px;
 }
 
+.task-card:hover {
+    background-color: #B9E0F3;
+}
+
 .task-card input {
     grid-column: 2;
     height: 90%;
     width: 95%;
     font-size: 1em;
+    background-color: inherit;
     border: none;
     cursor: default;
 }

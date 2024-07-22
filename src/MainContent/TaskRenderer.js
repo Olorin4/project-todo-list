@@ -3,7 +3,8 @@
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import { renderTaskIcons } from './TaskIconRenderer';
-import { createTask, removeTask } from "./TaskManager";
+import { setCurrentTask, createTask, removeTask } from "./TaskManager";
+import { renderCurrentTask } from "../SideBar/SubtaskRenderer";
     
 
 function renderCurrentProject() {
@@ -34,9 +35,18 @@ function renderTasks() {
         const taskTitle = document.createElement("input");
         taskTitle.value = task.title;
         taskCard.appendChild(taskTitle);
-        setupInputProperties(task.id, taskTitle);
         
+        setupInputProperties(task.id, taskTitle);
         renderTaskIcons(taskCard);
+        setupTaskCardProperties(taskCard, task.id);
+    });
+}
+
+
+function setupTaskCardProperties(taskCard, id) {
+    taskCard.addEventListener('click', () => {
+        setCurrentTask(id);
+        renderCurrentTask();
     });
 }
 

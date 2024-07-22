@@ -11,29 +11,42 @@
     align-items: center;
 }
 
-.right-sidebar > h4 {
-    font-weight: 600;
+.current-task {
+    padding-top: 20px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
 }
 
-.upcoming {
+.current-task > h2 {
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.task-details {
     background-color: #FFFFFF;
     box-shadow: 3px 3px rgb(225, 226, 226);
     border-radius: 5px;
     margin-left: 14px;
-    height: 60%;
+    padding-top: 10px;
+    margin-top: 5px;
+    height: 95%;
     display:flex;
     flex-direction: column;
 }
 
-.right-sidebar a {
-    font-size: 1.2em;
-    font-weight: 700;
+.task-details div {
+    font-size: 1em;
+    font-weight: 400;
     letter-spacing: -0.05ch;
+    padding: 10px;
 }
 
-.upcoming div {
+.task-details p {
     padding: 10px;
-    font-size: 0.7em;
+    font-size: 0.95em;
     border-bottom: 2px solid rgb(190, 188, 188);
     display: flex;
     flex-direction: column;
