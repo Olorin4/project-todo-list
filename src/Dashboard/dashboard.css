@@ -1,0 +1,141 @@
+/* DASHBOARD */
+
+button a,
+.dashboard a {
+    color: white;
+}
+
+.dashboard {
+    background-color: #1A92D3;
+    color: white;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    height: 98.9%;
+}
+
+#dashboard-title {
+    display: flex;
+    font-size: 0.9em;
+    letter-spacing: 0.05ch;
+}
+
+#dashboard-title img {
+    width: 30px;
+    margin-right: 5px;
+}
+
+.main-menu {
+    font-weight: 500;
+    display: grid;
+    grid-template-columns: 160px;
+    grid-template-rows: 1fr 9fr 2.14fr;
+    gap: 25px;
+}
+
+.menu-section-1 {
+    grid-row: 1;
+}
+
+.menu-section-2 {
+    grid-row: 2;
+}
+
+.menu-section-3 {
+    grid-row: 3;
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.menu-item:hover {
+    background-color: #1f88c1;
+}
+
+.menu-item img {
+    width: 16px;
+    height: 16px;
+    margin: 0 12px;
+}
+
+h3 {
+    font-size: 0.95em;
+    font-weight: 600;
+}
+
+.add-project {
+    width: 1.5em;
+    margin-top: 3px;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item:hover .add-project {
+    background-color: #1f88c1;
+    border-radius: 5px;
+}
+
+.project-list {
+    padding-right: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95em;
+}
+
+.project {
+    display: grid;
+    grid-template-columns: 40px 15px 120px;
+    grid-template-rows: 25px;
+    background-color: #1A92D3;
+}
+
+.delete-project {
+    grid-column: 2;
+    grid-row: 1;
+    height: 20px;
+    margin-top: 4px;
+    cursor: pointer;
+    background-color: #1A92D3;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.1;
+}
+
+.delete-project:hover {
+    background-color: #1f88c1;
+    opacity: 1;
+}
+
+.project-title {
+    grid-column: 3;
+    grid-row: 1;
+    width: 95%;
+    background-color: #1A92D3;
+    color: white;
+    border: none;
+    cursor: default;
+}
+
+.project-title:hover {
+    background-color: #1f88c1;
+}
+
+.project-title:focus {
+    border: none;
+    background-color: #1f88c1;
+    border-radius: 5px;
+    cursor: auto;
+}

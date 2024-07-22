@@ -2,21 +2,19 @@ import "./normalize.css";
 import "./styles.css";
 import { loadDashboard } from "./Dashboard/Dashboard";
 import { loadMainContent } from "./MainContent/MainContent";
+import { loadSideBar } from "./SideBar/SideBar";
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDashboard();
     loadMainContent();
+    loadSideBar()
     // loadHeader();
-    // loadRightSidebar();
     // loadFooter();
 });
 
 
 // TO DO:
-// - Add memory using the Web Storage API.
 // - Fix bug: error when no date is set in the date picker and then blur.
-// - Make delete-project button visible only on hover.
-// - If possible, separate the css file.
 // - Add task details, notes, subtasks, etc to the right-sidebar.
 
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 

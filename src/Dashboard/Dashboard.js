@@ -1,4 +1,5 @@
-// Dashboard.js handles UI logic of the dashboard section.
+// Dashboard.js initializes the UI of the Dashboard section.
+import './dashboard.css';
 import { initializeProjectList } from "./ProjectManager";
 import { renderProjects, setupAddProjectButton } from "./ProjectRenderer";
 
