@@ -16,43 +16,26 @@ export function renderTaskIcons(taskCard) {
     iconsContainer.classList.add("task-icons-container");
     taskCard.appendChild(iconsContainer);
 
-    const completedLink = document.createElement("img");
-    completedLink.classList.add("task-icons");
-    completedLink.id = "link-2";
-    completedLink.src = notCompletedImg;
-    completedLink.alt = "Mark as completed";
-    completedLink.title = "Mark as completed";
-    iconsContainer.appendChild(completedLink);
-    setupCompletedLink(completedLink);
-
-    const importantLink = document.createElement("img");
-    importantLink.classList.add("task-icons");
-    importantLink.id = "link-3";
-    importantLink.src = starImg;
-    importantLink.alt = "Mark as important";
-    importantLink.title = "Mark as important";
-    iconsContainer.appendChild(importantLink);
-    setupImportantLink(importantLink);
-
-    const dateLink = document.createElement("img");
-    dateLink.classList.add("task-icons");
-    dateLink.id = "link-4";
-    dateLink.src = calendarImg;
-    dateLink.alt = "Set due date";
-    dateLink.title = "Set due date";
-    iconsContainer.appendChild(dateLink);
-    
-    const dateInput = document.createElement('input');
-    dateInput.type = 'date';
-    dateInput.id = "due-date-input";
-    iconsContainer.appendChild(dateInput);
-    setupDueDateLink(dateLink, dateInput);
+    renderCompletedIcon(iconsContainer);
+    renderImportantIcon(iconsContainer);
+    renderDueDateIcon(iconsContainer);
 }
 
 
-function setupCompletedLink(completedLink) {
-    completedLink.addEventListener("click", event => {
-        const taskId = parseInt(completedLink.parentElement.parentElement.dataset.taskId);
+function renderCompletedIcon(iconsContainer) {
+    const completedIcon = document.createElement("img");
+    completedIcon.classList.add("task-icons");
+    completedIcon.id = "link-2";
+    completedIcon.src = notCompletedImg;
+    completedIcon.alt = "Mark as completed";
+    completedIcon.title = "Mark as completed";
+    iconsContainer.appendChild(completedIcon);
+    setupCompletedIcon(completedIcon);
+}
+
+function setupCompletedIcon(completedIcon) {
+    completedIcon.addEventListener("click", event => {
+        const taskId = parseInt(completedIcon.parentElement.parentElement.dataset.taskId);
         const task = projectList.currentProject.getTaskById(taskId);
         
         toggleCompletedStatus(taskId);
@@ -60,12 +43,12 @@ function setupCompletedLink(completedLink) {
         
         if (task.isCompleted) {
             // addToCompleted();
-            completedLink.src = completedImg;
-            completedLink.title = "Mark as not completed";
+            completedIcon.src = completedImg;
+            completedIcon.title = "Mark as not completed";
         } else {
             // createTask(taskId, taskTitle);
-            completedLink.src = notCompletedImg;
-            completedLink.title = "Mark as completed";
+            completedIcon.src = notCompletedImg;
+            completedIcon.title = "Mark as completed";
         }
 
         renderTasks();
@@ -74,22 +57,33 @@ function setupCompletedLink(completedLink) {
 }
 
 
-function setupImportantLink(importantLink) {
-    importantLink.addEventListener("click", event => {
-        const taskId = parseInt(importantLink.parentElement.parentElement.dataset.taskId);
+function renderImportantIcon(iconsContainer) {
+    const importantIcon = document.createElement("img");
+    importantIcon.classList.add("task-icons");
+    importantIcon.id = "link-3";
+    importantIcon.src = starImg;
+    importantIcon.alt = "Mark as important";
+    importantIcon.title = "Mark as important";
+    iconsContainer.appendChild(importantIcon);
+    setupImportantIcon(importantIcon);
+}
+
+function setupImportantIcon(importantIcon) {
+    importantIcon.addEventListener("click", event => {
+        const taskId = parseInt(importantIcon.parentElement.parentElement.dataset.taskId);
         const task = projectList.currentProject.getTaskById(taskId);
 
         toggleImportantStatus(taskId);
 
         if (task.isImportant) {
             // addToImportant()
-            importantLink.classList.add("important-task");
-            importantLink.src = starImgYellow;
-            importantLink.title = "Mark as not important";
+            importantIcon.classList.add("important-task");
+            importantIcon.src = starImgYellow;
+            importantIcon.title = "Mark as not important";
         } else {
-            importantLink.classList.remove("important-task");
-            importantLink.src = starImg;
-            importantLink.title = "Mark as important";
+            importantIcon.classList.remove("important-task");
+            importantIcon.src = starImg;
+            importantIcon.title = "Mark as important";
         }
         
         logTaskList();
@@ -97,9 +91,25 @@ function setupImportantLink(importantLink) {
 }
 
 
-function setupDueDateLink(dateLink, dateInput) {
-    dateLink.addEventListener("click", event => {
-        const taskId = parseInt(dateLink.parentElement.parentElement.dataset.taskId, 10);
+function renderDueDateIcon(iconsContainer) {
+    const dateIcon = document.createElement("img");
+    dateIcon.classList.add("task-icons");
+    dateIcon.id = "link-4";
+    dateIcon.src = calendarImg;
+    dateIcon.alt = "Set due date";
+    dateIcon.title = "Set due date";
+    iconsContainer.appendChild(dateIcon);
+    
+    const dateInput = document.createElement('input');
+    dateInput.type = 'date';
+    dateInput.id = "due-date-input";
+    iconsContainer.appendChild(dateInput);
+    setupDueDateIcon(dateIcon, dateInput);
+}
+
+function setupDueDateIcon(dateIcon, dateInput) {
+    dateIcon.addEventListener("click", event => {
+        const taskId = parseInt(dateIcon.parentElement.parentElement.dataset.taskId, 10);
         dateInput.style.display = 'block'; // Show the date picker
         dateInput.focus();
 
@@ -118,9 +128,4 @@ function setupDueDateLink(dateLink, dateInput) {
             }
         });
     });    
-}
-
-
-function disableLinks() {
-
 }
