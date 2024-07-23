@@ -3,6 +3,7 @@
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import { save } from "../Dashboard/ProjectSaver";
+import { renderCurrentTask } from "../SideBar/SubtaskRenderer";
 
 
 function setCurrentTask(id) {
@@ -32,7 +33,8 @@ function setCurrentTask(id) {
     
     console.log(`Current task set: ${taskToSetAsCurrent.title} (ID: ${id})`);
 
-    save(projectList)
+    save(projectList);
+    renderCurrentTask();
 }
 
 
