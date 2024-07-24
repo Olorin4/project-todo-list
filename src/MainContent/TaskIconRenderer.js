@@ -1,5 +1,5 @@
 // TaskLinkRenderer.js handles UI logic of all links inside the Task Card.
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isValid } from "date-fns";
 import starImg from '../assets/star-plus-outline.svg';
 import starImgYellow from '../assets/star-plus-outline-yellow.svg';
 import completedImg from "../assets/completed.svg";
@@ -116,13 +116,19 @@ function setupDueDateIcon(dateIcon, dateInput) {
 
         const handleDateInput = () => {
             const parsedDate = parseISO(dateInput.value);
-            const formattedDate = format(parsedDate, 'yyyy-MM-dd');
-            setTaskDueDate(taskId, formattedDate);
-            dateInput.style.display = 'none'; // Hide the date input after selection
-        };
+            if (isValid(parsedDate)) {
+                // Format the valid date
+                const formattedDate = format(parsedDate, 'yyyy-MM-dd');
+                setTaskDueDate(taskId, formattedDate);
+            } else {
+                console.error("Invalid date value");
+                // Handle invalid date (e.g., show an error message or reset the input)
+                dateInput.value = ''; // Clear the invalid date input
+            }
+            dateInput.style.display = 'none';
+        }
 
         dateInput.addEventListener('blur', handleDateInput);
-
         dateInput.addEventListener('keydown', event => {
             if (event.key === 'Enter') {
                 handleDateInput();
