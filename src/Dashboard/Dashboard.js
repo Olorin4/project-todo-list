@@ -8,9 +8,4 @@ export function loadDashboard() {
     initializeProjectList();
     setupAddProjectButton();
     renderProjects();
-
-    // Experimental:
-    
-    // Debugging:
-
 }

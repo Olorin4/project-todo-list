@@ -5,7 +5,4 @@ import { renderCurrentTask } from './SidebarRenderer';
 
 export function loadSideBar() {
     renderCurrentTask();
-    
-    // Debugging:
-    
 }

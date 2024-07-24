@@ -3,7 +3,7 @@ import deleteSVG from "../assets/delete.svg";
 import { Project } from "../Objects";
 import { renderCurrentProject, renderTasks } from "../MainContent/TaskRenderer";
 import { projectList, setCurrentProject, createProject,
-    deleteProject, renameProject, logProjectList } from "./ProjectManager";
+    deleteProject, renameProject } from "./ProjectManager";
 
 
 function renderProjects() {
@@ -43,8 +43,6 @@ function setupAddProjectButton() {
         createProject(newProjectId, `Project ${newProjectId}`);
         renderProjects();
         renderCurrentProject();
-        console.log(`projectCount is ${projectList.projectCount}`);
-        logProjectList();
     });
 }
 
@@ -52,19 +50,12 @@ function setupAddProjectButton() {
 function setupDeleteProjectButton() {
     document.querySelectorAll(".delete-project").forEach((btn) => {
         btn.addEventListener("click", (event) => {
-            if (projectList.projects.length == 1) {
-                return  // Don't delete the last remaining project.
-            }
+            if (projectList.projects.length == 1) { return }
 
-            // Find the nearest ancestor element with the class "project"
             const projectTab = event.target.closest(".project");
-            // Extract the id from data-project-id
             const projectId = parseInt(projectTab.dataset.projectId, 10);  //?
             deleteProject(projectId);
             projectTab.remove();
-
-            console.log(`projectCount is ${projectList.projectCount}`);
-
             renderProjects();
             renderCurrentProject();
             logProjectList();
@@ -74,28 +65,24 @@ function setupDeleteProjectButton() {
 
 
 function setupInputProperties(id, projectTitle) {
-    // Set up event listener for switching tabs:
     projectTitle.addEventListener('click', () => {
         projectTitle.blur();
         setCurrentProject(id);
         renderCurrentProject();
     });
 
-    // Event listener for double-click to make input editable:
     projectTitle.addEventListener('dblclick', () => {
         projectTitle.readOnly = false;
         projectTitle.classList.add('editable');
-        projectTitle.focus(); // Focus the input field for immediate editing
+        projectTitle.focus();
     });
 
-    // Event listener for blur to make input read-only again:
     projectTitle.addEventListener('blur', () => {
         projectTitle.classList.remove('editable');
         projectTitle.readOnly = true;
         renameProject(id, projectTitle.value);
     });
 
-    // Event listener for enter key to make input read-only again:
     projectTitle.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             projectTitle.classList.remove('editable');

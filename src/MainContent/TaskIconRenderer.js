@@ -7,7 +7,7 @@ import notCompletedImg from "../assets/not-completed.svg";
 import calendarImg from "../assets/calendar-black.svg";
 import { projectList } from "../Dashboard/ProjectManager";
 import { createTask, removeTask, toggleCompletedStatus, toggleImportantStatus,
-        setTaskDueDate, logTaskList } from "./TaskManager";
+        setTaskDueDate } from "./TaskManager";
 import { renderTasks } from "./TaskRenderer";
 import { save } from "../Dashboard/ProjectSaver";
 
@@ -37,8 +37,8 @@ function renderCompletedIcon(iconsContainer, taskId) {
 }
 
 function setupCompletedIcon(completedIcon, taskId) {
+    const task = projectList.currentProject.getTaskById(taskId);
     completedIcon.addEventListener("click", event => {
-        const task = projectList.currentProject.getTaskById(taskId);
         toggleCompletedStatus(taskId);
         removeTask(taskId, projectList.currentProject.id);
         
@@ -47,14 +47,18 @@ function setupCompletedIcon(completedIcon, taskId) {
             completedIcon.src = completedImg;
             completedIcon.title = "Mark as not completed";
         } else {
-            // createTask(taskId, taskTitle);
             completedIcon.src = notCompletedImg;
             completedIcon.title = "Mark as completed";
         }
-
         renderTasks();
-        logTaskList();
     })
+
+    completedIcon.addEventListener("mouseenter", () => {
+        completedIcon.src = task.isCompleted ? notCompletedImg : completedImg;
+    });
+    completedIcon.addEventListener("mouseleave", () => {
+        completedIcon.src = task.isCompleted ? completedImg : notCompletedImg;
+    });
 }
 
 
@@ -73,7 +77,6 @@ function renderImportantIcon(iconsContainer, taskId) {
 function setupImportantIcon(importantIcon, taskId) {
     importantIcon.addEventListener("click", event => {
         const task = projectList.currentProject.getTaskById(taskId);
-
         toggleImportantStatus(taskId);
 
         if (task.isImportant) {
@@ -86,8 +89,6 @@ function setupImportantIcon(importantIcon, taskId) {
             importantIcon.src = starImg;
             importantIcon.title = "Mark as important";
         }
-        // save();
-        logTaskList();
     });
 }
 
@@ -111,19 +112,17 @@ function renderDueDateIcon(iconsContainer) {
 function setupDueDateIcon(dateIcon, dateInput) {
     dateIcon.addEventListener("click", event => {
         const taskId = parseInt(dateIcon.parentElement.parentElement.dataset.taskId, 10);
-        dateInput.style.display = 'block'; // Show the date picker
+        dateInput.style.display = 'block';
         dateInput.focus();
 
         const handleDateInput = () => {
             const parsedDate = parseISO(dateInput.value);
             if (isValid(parsedDate)) {
-                // Format the valid date
                 const formattedDate = format(parsedDate, 'yyyy-MM-dd');
                 setTaskDueDate(taskId, formattedDate);
             } else {
                 console.error("Invalid date value");
-                // Handle invalid date (e.g., show an error message or reset the input)
-                dateInput.value = ''; // Clear the invalid date input
+                dateInput.value = '';
             }
             dateInput.style.display = 'none';
         }

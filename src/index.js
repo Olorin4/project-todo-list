@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Fix bug: error when no date is set in the date picker and then blur.
+// - Add function that deletes a subtask.
 
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add calendar to right-sidebar.

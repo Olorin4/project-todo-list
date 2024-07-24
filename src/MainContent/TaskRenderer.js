@@ -10,7 +10,6 @@ import { renderCurrentTask } from "../SideBar/SidebarRenderer";
 function renderCurrentProject() {
     const currentProject = projectList.currentProject;
     const currentProjectTitle = document.querySelector(".current-project h2");
-
     if (currentProject) {
         currentProjectTitle.textContent = currentProject.title;
         renderTasks(currentProject);
@@ -24,7 +23,7 @@ function renderCurrentProject() {
 
 function renderTasks(currentProject) {
     const taskListContainer = document.querySelector(".task-list-container");
-    taskListContainer.innerHTML = ""; // Clear any existing tasks
+    taskListContainer.innerHTML = "";
 
     currentProject.tasks.forEach(task => {
         const taskCard = document.createElement("div");
@@ -53,7 +52,6 @@ function setupTaskCardProperties(taskCard, id) {
 
 function setupAddTask() {
     const taskTitleInput = document.querySelector(".task-title");
-
     if (!taskTitleInput) {
         console.error("Task input field not found.");
         return;
@@ -67,8 +65,8 @@ function setupAddTask() {
                 const currentProject = projectList.currentProject;
                 const newTaskId = currentProject.taskCount + 1;
                 createTask(newTaskId, newTaskTitle);
-                renderTasks(currentProject); // Re-render the tasks to include the new task
-                taskTitleInput.value = ''; // Clear the input field
+                renderTasks(currentProject);
+                taskTitleInput.value = '';
             }
         }
     });
@@ -76,23 +74,22 @@ function setupAddTask() {
 
 
 function setupInputProperties(id, taskTitle) {
-    // Set up event listener for switching tabs:
     taskTitle.addEventListener('click', () => {
         taskTitle.blur();
     });
-    // Event listener for double-click to make input editable:
+
     taskTitle.addEventListener('dblclick', () => {
         taskTitle.readOnly = false;
         taskTitle.classList.add('editable');
-        taskTitle.focus(); // Focus the input field for immediate editing
+        taskTitle.focus();
     });
-    // Event listener for blur to make input read-only again:
+
     taskTitle.addEventListener('blur', () => {
         taskTitle.classList.remove('editable');
         taskTitle.readOnly = true;
         // renameTask(id, taskTitle.value);
     });
-    // Event listener for enter key to make input read-only again:
+
     taskTitle.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             taskTitle.classList.remove('editable');

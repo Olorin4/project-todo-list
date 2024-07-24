@@ -2,7 +2,6 @@
 // and altering properties of subtasks.
 import { Project, Task, Subtask } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
-import { logTaskList } from "../MainContent/TaskManager";
 import { save } from "../Dashboard/ProjectSaver";
 
 
@@ -12,13 +11,9 @@ function createSubtask(id, title) {
         console.error("No current project selected.");
         return;
     }
-    
     const newSubtask = new Subtask(id, title);
     currentTask.addSubtask(newSubtask);
-
-    console.log(`Subtask ${title} with ID ${id} created, under task ${currentTask.title}.`);
     save(projectList)
-    logTaskList();
 }
 
 
@@ -29,28 +24,19 @@ function removeSubtask(SubtaskId, taskId) {
         return;
     }
     currentTask.removeSubtask(taskId);
-    
-    console.log(`Subtask removed: ID ${taskId} from Task ${taskId}`);
-
     save(projectList);
-    logTaskList();
 }
 
 
 function toggleCompletedStatus(id) {
     const currentTask = projectList.currentProject.currentTask;
-    console.log(`Current Task: ${currentTask.title}`);
-    console.log(`Subtasks in Current Task:`, currentTask.subtasks);
-
     const SubTask = currentTask.getSubTaskById(id);
     if (!SubTask) {
         console.error(`SubTask with ID ${id} not found.`);
         return;
     }
-
     SubTask.isCompleted = !SubTask.isCompleted;
     console.log(`SubTask with ID ${id} marked as completed.`);
-
     save(projectList);
 }
 
