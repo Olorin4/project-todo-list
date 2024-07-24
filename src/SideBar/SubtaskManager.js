@@ -1,6 +1,6 @@
 // SubtaskManager.js handles all subtask logic: creating, removing, renaming
 // and altering properties of subtasks.
-import { Project, Task } from "../Objects";
+import { Project, Task, Subtask } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import { logTaskList } from "../MainContent/TaskManager";
 import { save } from "../Dashboard/ProjectSaver";
@@ -13,7 +13,7 @@ function createSubtask(id, title) {
         return;
     }
     
-    const newSubtask = new Task(id, title, currentTask.id);
+    const newSubtask = new Subtask(id, title, currentTask.id);
     currentTask.addSubtask(newSubtask);
 
     console.log(`Subtask ${title} with ID ${id} created, under task ${currentTask.title}.`);

@@ -5,6 +5,7 @@ import { renderCurrentTask, renderSubtasks } from './SubtaskRenderer';
 
 export function loadSideBar() {
     renderCurrentTask();
+    
 
     
     // Debugging:

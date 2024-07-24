@@ -112,6 +112,7 @@ class Task {
 
     addSubtask(subtask) {
         this.subtasks.push(subtask);
+        this.subtasksCount++;
     }
     removeSubtask(id) {
         this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
@@ -119,6 +120,7 @@ class Task {
         this.subtasks.forEach((subtask, index) => {
             subtask.id = index + 1;
         });
+        this.subtasksCount--;
     }
 
     getSubtaskById(id) {
@@ -128,9 +130,9 @@ class Task {
 
 
 class Subtask {
-    constructor(id, description) {
+    constructor(id, title) {
         this.id = id;
-        this.description = description;
+        this.title = title;
         this._isCompleted = false;
     }
 
