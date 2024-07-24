@@ -4,7 +4,8 @@ import { save } from "../Dashboard/ProjectSaver";
 import PlusSvgBlack from "../assets/plus-black.svg";
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
-import { createSubtask, removeSubtask, toggleCompletedStatus } from "./SubtaskManager";
+import {createSubtask, removeSubtask,
+    toggleCompletedStatus, renameSubtask } from "./SubtaskManager";
 import { add } from "date-fns";
 
 
@@ -85,7 +86,7 @@ function renderSubtasks(currentTask, subtasks) {
         
         const subtaskTitle = document.createElement("input");
         subtaskTitle.readOnly = true;
-        // setupInputProperties(subtask.id, subtask.title);
+        setupInputProperties(subtask.id, subtaskTitle);
         subtaskTitle.value = subtask.title;
         subtaskTab.appendChild(subtaskTitle);
     });
@@ -116,7 +117,7 @@ function setupInputProperties(subtaskId, subtaskTitle) {
     subtaskTitle.addEventListener('blur', () => {
         subtaskTitle.classList.remove('editable');
         subtaskTitle.readOnly = true;
-        // renameSubtask(id, subtaskTitle.value);
+        renameSubtask(subtaskId, subtaskTitle.value);
     });
 
     subtaskTitle.addEventListener('keydown', (event) => {

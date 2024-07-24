@@ -41,4 +41,12 @@ function toggleCompletedStatus(id) {
 }
 
 
-export { createSubtask, removeSubtask, toggleCompletedStatus };
+function renameSubtask(id, newTitle) {
+    const currentTask = projectList.currentProject.currentTask;
+    const subtaskToRename = currentTask.getSubtaskById(id);
+    subtaskToRename.title = newTitle;
+    save(projectList);
+}
+
+
+export { createSubtask, removeSubtask, toggleCompletedStatus, renameSubtask };
