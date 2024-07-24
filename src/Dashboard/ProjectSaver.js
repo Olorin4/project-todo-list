@@ -19,7 +19,7 @@ export function save(projectList) {
                 notes: task.notes,
                 subtasks: task.subtasks.map(subtask => ({
                     id: subtask.id,
-                    description: subtask.description,
+                    title: subtask.title,
                     _isCompleted: subtask._isCompleted
                 }))
             }))
@@ -52,7 +52,7 @@ export function loadSavedProjectList(serializedData) {
 
             // Reconstruct Subtask instances and add them to the Task
             taskData.subtasks.forEach(subtaskData => {
-                const subtask = new Subtask(subtaskData.id, subtaskData.description);
+                const subtask = new Subtask(subtaskData.id, subtaskData.title);
                 subtask._isCompleted = subtaskData._isCompleted;
 
                 task.addSubtask(subtask);

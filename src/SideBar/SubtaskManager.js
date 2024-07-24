@@ -13,7 +13,7 @@ function createSubtask(id, title) {
         return;
     }
     
-    const newSubtask = new Subtask(id, title, currentTask.id);
+    const newSubtask = new Subtask(id, title);
     currentTask.addSubtask(newSubtask);
 
     console.log(`Subtask ${title} with ID ${id} created, under task ${currentTask.title}.`);

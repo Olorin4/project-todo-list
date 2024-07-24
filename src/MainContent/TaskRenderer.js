@@ -8,11 +8,13 @@ import { renderCurrentTask } from "../SideBar/SubtaskRenderer";
     
 
 function renderCurrentProject() {
+    const currentProject = projectList.currentProject;
     const currentProjectTitle = document.querySelector(".current-project h2");
 
-    if (projectList.currentProject) {
-        currentProjectTitle.textContent = projectList.currentProject.title;
-        renderTasks();
+    if (currentProject) {
+        currentProjectTitle.textContent = currentProject.title;
+        renderTasks(currentProject);
+        renderCurrentTask();
     } else {
         currentProjectTitle.textContent = "";
         console.error("No current project found.");
@@ -20,11 +22,9 @@ function renderCurrentProject() {
 }
 
 
-function renderTasks() {
+function renderTasks(currentProject) {
     const taskListContainer = document.querySelector(".task-list-container");
     taskListContainer.innerHTML = ""; // Clear any existing tasks
-
-    const currentProject = projectList.currentProject;
 
     currentProject.tasks.forEach(task => {
         const taskCard = document.createElement("div");
@@ -66,11 +66,8 @@ function setupAddTask() {
             if (newTaskTitle) {
                 const currentProject = projectList.currentProject;
                 const newTaskId = currentProject.taskCount + 1;
-                
                 createTask(newTaskId, newTaskTitle);
-
-                renderTasks(); // Re-render the tasks to include the new task
-                
+                renderTasks(currentProject); // Re-render the tasks to include the new task
                 taskTitleInput.value = ''; // Clear the input field
             }
         }

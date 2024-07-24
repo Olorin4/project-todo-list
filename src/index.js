@@ -14,10 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Fix: when deleting a task or switching current project,
-//   the side bar isn't updated.
 // - Fix bug: error when no date is set in the date picker and then blur.
-// - Add task details, notes, subtasks, etc to the right-sidebar.
+// - Add notes to the right-sidebar.
 
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add calendar to right-sidebar.

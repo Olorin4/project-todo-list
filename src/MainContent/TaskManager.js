@@ -3,7 +3,6 @@
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import { save } from "../Dashboard/ProjectSaver";
-import { renderCurrentTask } from "../SideBar/SubtaskRenderer";
 
 
 function setCurrentTask(id) {
@@ -12,7 +11,7 @@ function setCurrentTask(id) {
         console.error("No current project selected.");
         return;
     }
-
+    
     const taskToSetAsCurrent = currentProject.getTaskById(id);
 
     if (!taskToSetAsCurrent) {
@@ -23,10 +22,7 @@ function setCurrentTask(id) {
         return; // No need to update if already current
     }
 
-    // Unset current-task status for all tasks in the project
-    currentProject.tasks.forEach(task => {
-        task.isCurrent = false;
-    });
+    unsetCurrentTask();
 
     // Set current-task status for the specified task
     taskToSetAsCurrent.isCurrent = true;
@@ -34,7 +30,15 @@ function setCurrentTask(id) {
     console.log(`Current task set: ${taskToSetAsCurrent.title} (ID: ${id})`);
 
     save(projectList);
-    renderCurrentTask();
+}
+
+
+function unsetCurrentTask() {
+    projectList.projects.forEach(proj => {
+        proj.tasks.forEach(task => {
+            task.isCurrent = false;
+        });
+    });
 }
 
 
@@ -50,8 +54,8 @@ function createTask(id, title) {
 
     console.log(`Task ${title} with ID ${id} created, under project ${currentProject.title}.`);
     
-    logTaskList();
     setCurrentTask(id);
+    logTaskList();
 }
 
 
@@ -62,10 +66,11 @@ function removeTask(taskId, projectId) {
         return;
     }
     currentProject.removeTask(taskId);
-    logTaskList();
+    
     console.log(`Task removed: ID ${taskId} from project ${projectId}`);
 
     save(projectList);
+    logTaskList();
 }
 
 
@@ -133,5 +138,5 @@ function logTaskList() {
 window.logTaskList = logTaskList;
 
 
-export { setCurrentTask, createTask, removeTask, toggleCompletedStatus,
-    toggleImportantStatus, setTaskDueDate, logTaskList };
+export { setCurrentTask, unsetCurrentTask, createTask, removeTask,
+    toggleCompletedStatus, toggleImportantStatus, setTaskDueDate, logTaskList };

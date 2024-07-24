@@ -2,6 +2,7 @@
 // renaming and setting as current.
 import { loadSavedProjectList, save } from "./ProjectSaver";
 import { ProjectList, Project } from "../Objects";
+import { unsetCurrentTask } from "../MainContent/TaskManager";
 
 
 let projectList;
@@ -54,6 +55,9 @@ function setCurrentProject(id) {
     projectList.projects.forEach(proj => {
         proj.isCurrent = false;
     });
+
+    unsetCurrentTask();
+    
     // Set current-project status for the specified project
     projectToSetAsCurrent.isCurrent = true;
     
