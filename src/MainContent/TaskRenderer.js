@@ -2,9 +2,9 @@
 // which includes several icons and html elements.
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
-import { renderTaskIcons } from './TaskIconRenderer';
 import { setCurrentTask, createTask, removeTask } from "./TaskManager";
-import { renderCurrentTask } from "../SideBar/SubtaskRenderer";
+import { renderTaskIcons } from './TaskIconRenderer';
+import { renderCurrentTask } from "../SideBar/SidebarRenderer";
     
 
 function renderCurrentProject() {
@@ -80,21 +80,18 @@ function setupInputProperties(id, taskTitle) {
     taskTitle.addEventListener('click', () => {
         taskTitle.blur();
     });
-
     // Event listener for double-click to make input editable:
     taskTitle.addEventListener('dblclick', () => {
         taskTitle.readOnly = false;
         taskTitle.classList.add('editable');
         taskTitle.focus(); // Focus the input field for immediate editing
     });
-
     // Event listener for blur to make input read-only again:
     taskTitle.addEventListener('blur', () => {
         taskTitle.classList.remove('editable');
         taskTitle.readOnly = true;
         // renameTask(id, taskTitle.value);
     });
-
     // Event listener for enter key to make input read-only again:
     taskTitle.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {

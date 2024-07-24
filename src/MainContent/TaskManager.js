@@ -123,6 +123,11 @@ function setTaskDueDate(id, dueDate) {
 }
 
 
+function saveTaskNotes(currentTask) {
+    
+}
+
+
 // Function to log taskList and its contents
 function logTaskList() {
     console.log("Task List:");

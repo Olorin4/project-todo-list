@@ -1,5 +1,6 @@
-// SubtaskTaskRenderer.js handles UI logic of the SideBar,
+// SidebarRenderer.js handles UI logic of the SideBar,
 // which includes notes, subtasks and icons.
+import { save } from "../Dashboard/ProjectSaver";
 import PlusSvgBlack from "../assets/plus-black.svg";
 import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
@@ -7,28 +8,20 @@ import { createSubtask, removeSubtask, toggleCompletedStatus } from "./SubtaskMa
 import { add } from "date-fns";
 
 
-function clearSidebar() {
-    const currentTaskTitle = document.querySelector(".current-task h4");
-    const taskDetails = document.querySelector(".task-details");
-
-    // Clear the content of the title and task details container
-    currentTaskTitle.innerHTML = "";
-    taskDetails.innerHTML = "";
-}
-
-
 function renderCurrentTask() {
     const currentTask = projectList.currentProject.currentTask;
     const currentTaskTitle = document.querySelector(".current-task h4");
     const taskDetails = document.querySelector(".task-details");
-    taskDetails.style.opacity = "1";
 
     if (!currentTask) {
-        clearSidebar();
+        currentTaskTitle.innerHTML = "";
+        taskDetails.innerHTML = "";
+        taskDetails.style.opacity = "0";
         console.error("No current task found.");
     } else {
         console.log("Current Task:", currentTask);
         currentTaskTitle.textContent = currentTask.title;
+        taskDetails.style.opacity = "1";
         renderTaskDetails(currentTask);
     }
 }
@@ -37,12 +30,6 @@ function renderCurrentTask() {
 function renderTaskDetails(currentTask) {    
     const taskDetails = document.querySelector(".task-details");
     taskDetails.style.opacity = "1";
-
-    if (!currentTask) {
-        // Do not render details if no current task
-        return;
-    }
-
     taskDetails.innerHTML = "";
 
     // Create notes container
@@ -54,7 +41,9 @@ function renderTaskDetails(currentTask) {
     const notesText = document.createElement("textarea");
     notesText.setAttribute("cols", "35");
     notesText.setAttribute("rows", "10");
+    notesText.value = currentTask.notes || "";
     notesContainer.appendChild(notesText);
+    setupTextArea(currentTask, notesText);
 
     // Create subtasks container
     const subtaskContainer = document.createElement("div");
@@ -82,6 +71,13 @@ function renderTaskDetails(currentTask) {
     taskDetails.appendChild(optionsContainer);
 }
     
+
+function setupTextArea(currentTask, notesText) {
+    notesText.addEventListener("input", () => {
+        currentTask.notes = notesText.value;
+        save(projectList);
+    });
+}
 
 
 function renderSubtasks(currentTask, subtasks) {
@@ -119,21 +115,18 @@ function setupInputProperties(subtaskId, subtaskTitle) {
     subtaskTitle.addEventListener('click', () => {
         subtaskTitle.blur();
     });
-
     // Event listener for double-click to make input editable:
     subtaskTitle.addEventListener('dblclick', () => {
         subtaskTitle.readOnly = false;
         subtaskTitle.classList.add('editable');
         subtaskTitle.focus(); // Focus the input field for immediate editing
     });
-
     // Event listener for blur to make input read-only again:
     subtaskTitle.addEventListener('blur', () => {
         subtaskTitle.classList.remove('editable');
         subtaskTitle.readOnly = true;
         renameSubtask(id, subtaskTitle.value);
     });
-
     // Event listener for enter key to make input read-only again:
     subtaskTitle.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
