@@ -50,7 +50,7 @@ function setupCompletedIcon(completedIcon, taskId) {
             completedIcon.src = notCompletedImg;
             completedIcon.title = "Mark as completed";
         }
-        renderTasks();
+        renderTasks(projectList.currentProject);
     })
 
     completedIcon.addEventListener("mouseenter", () => {

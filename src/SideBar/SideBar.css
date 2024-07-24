@@ -76,7 +76,7 @@ textarea:hover {
     cursor: default;
 }
 
-.complete-subtask {
+/* .complete-subtask {
     grid-column: 2;
     grid-row: 1;
     height: 20px;
@@ -94,4 +94,4 @@ textarea:hover {
 .complete-subtask:hover {
     background-color: #1f88c1;
     opacity: 1;
-}
+} */
