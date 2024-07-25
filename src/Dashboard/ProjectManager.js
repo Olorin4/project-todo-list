@@ -74,5 +74,6 @@ function renameProject(id, newTitle) {
     save(projectList);
 }
 
+
 export {projectList, initializeProjectList, setCurrentProject,
         createProject, deleteProject, renameProject };

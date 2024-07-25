@@ -58,7 +58,6 @@ function setupDeleteProjectButton() {
             projectTab.remove();
             renderProjects();
             renderCurrentProject();
-            logProjectList();
         });
     });
 }

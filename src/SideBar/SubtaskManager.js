@@ -17,26 +17,27 @@ function createSubtask(id, title) {
 }
 
 
-function removeSubtask(SubtaskId, taskId) {
+function removeSubtask(subtaskId) {
     const currentTask = projectList.currentProject.currentTask;
     if (!currentTask) {
-        console.error(`Task with ID ${taskId} not found.`);
+        console.error(`Task with ID ${currentTask.id} not found.`);
         return;
     }
-    currentTask.removeSubtask(taskId);
+    currentTask.removeSubtask(subtaskId);
+    console.log(`Subtask with ID ${subtaskId} removed.`);
     save(projectList);
 }
 
 
-function toggleCompletedStatus(id) {
+function toggleCompletedStatus(subtaskId) {
     const currentTask = projectList.currentProject.currentTask;
-    const SubTask = currentTask.getSubTaskById(id);
-    if (!SubTask) {
-        console.error(`SubTask with ID ${id} not found.`);
+    const subTask = currentTask.getSubtaskById(subtaskId);
+    if (!subTask) {
+        console.error(`SubTask with ID ${subtaskId} not found.`);
         return;
     }
-    SubTask.isCompleted = !SubTask.isCompleted;
-    console.log(`SubTask with ID ${id} marked as completed.`);
+    subTask.isCompleted = !subTask.isCompleted;
+    console.log(`SubTask with ID ${subtaskId} marked as completed.`);
     save(projectList);
 }
 

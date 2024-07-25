@@ -75,10 +75,6 @@
     height: 20px;
 }
 
-.completed-task {
-    text-decoration: line-through;
-}
-
 #due-date-input {
     display: none;
     position: absolute;

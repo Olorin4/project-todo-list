@@ -69,6 +69,11 @@ textarea:hover {
     align-items: center;
 }
 
+.link-2 {
+    cursor: pointer;
+    height: 20px;
+}
+
 .subtask-tab > input {
     margin-top: 5px;
     margin-left: 15px;

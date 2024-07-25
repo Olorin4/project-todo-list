@@ -1,5 +1,7 @@
 // SidebarRenderer.js handles UI logic of the SideBar,
 // which includes notes, subtasks and icons.
+import completedImg from "../assets/completed.svg";
+import notCompletedImg from "../assets/not-completed.svg";
 import { save } from "../Dashboard/ProjectSaver";
 import PlusSvgBlack from "../assets/plus-black.svg";
 import { Project, Task } from "../Objects";
@@ -7,6 +9,8 @@ import { projectList } from "../Dashboard/ProjectManager";
 import {createSubtask, removeSubtask,
     toggleCompletedStatus, renameSubtask } from "./SubtaskManager";
 import { add } from "date-fns";
+import { unsetCurrentTask } from "../MainContent/TaskManager";
+import { format, parseISO, isValid } from "date-fns";
 
 
 function renderCurrentTask() {
@@ -65,6 +69,7 @@ function renderTaskDetails(currentTask) {
     optionsContainer.classList.add("options-container");
     optionsContainer.textContent = "OPTIONS";
     taskDetails.appendChild(optionsContainer);
+    renderOptions(currentTask, optionsContainer);
 }
     
 
@@ -84,6 +89,8 @@ function renderSubtasks(currentTask, subtasks) {
         subtaskTab.dataset.taskId = subtask.id;
         subtasks.appendChild(subtaskTab);
         
+        renderCompletedIcon(subtaskTab, subtask.id);
+
         const subtaskTitle = document.createElement("input");
         subtaskTitle.readOnly = true;
         setupInputProperties(subtask.id, subtaskTitle);
@@ -99,6 +106,42 @@ function setupAddSubtaskButton(currentTask, subtasks) {
         const newSubtaskId = currentTask.subtasksCount + 1;
         createSubtask(newSubtaskId, `Subtask ${newSubtaskId}`);
         renderSubtasks(currentTask, subtasks);
+    });
+}
+
+
+function renderCompletedIcon(subtaskTab, subtaskId) {
+    const completedIcon = document.createElement("img");
+    completedIcon.classList.add("link-2");
+    completedIcon.id = "completed-icon";
+    completedIcon.src = notCompletedImg;
+    completedIcon.alt = "Mark as completed";
+    completedIcon.title = "Mark as completed";
+    subtaskTab.appendChild(completedIcon);
+    setupCompletedIcon(completedIcon, subtaskId);
+}
+
+function setupCompletedIcon(completedIcon, subtaskId) {
+    const subtask = projectList.currentProject.currentTask.getSubtaskById(subtaskId);
+    completedIcon.addEventListener("click", event => {
+        toggleCompletedStatus(subtaskId);
+        
+        if (subtask.isCompleted) {
+            completedIcon.src = completedImg;
+            completedIcon.title = "Mark as not completed";
+        } else {
+            completedIcon.src = notCompletedImg;
+            completedIcon.title = "Mark as completed";
+        }
+        removeSubtask(subtaskId);
+        renderSubtasks(projectList.currentProject.currentTask, completedIcon.parentElement.parentElement);
+    })
+
+    completedIcon.addEventListener("mouseenter", () => {
+        completedIcon.src = subtask.isCompleted ? notCompletedImg : completedImg;
+    });
+    completedIcon.addEventListener("mouseleave", () => {
+        completedIcon.src = subtask.isCompleted ? completedImg : notCompletedImg;
     });
 }
 
@@ -127,6 +170,15 @@ function setupInputProperties(subtaskId, subtaskTitle) {
             subtaskTitle.blur();
         }
     });
+}
+
+
+function renderOptions(currentTask, optionsContainer) {
+    if (currentTask.dueDate) {
+        const dueDate = document.createElement("div");
+        dueDate.textContent = `This task is due on ${format(parseISO(currentTask.dueDate), 'yyyy-MM-dd')}.`;
+        optionsContainer.appendChild(dueDate);
+    }
 }
 
 

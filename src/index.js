@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // TO DO:
-// - Add function that deletes a subtask.
+// - Debug completedIcon of subtasks.
 
 // - Add real links to the Dashboard (Important, Tasks, Calendar, etc). 
 // - Add calendar to right-sidebar.
