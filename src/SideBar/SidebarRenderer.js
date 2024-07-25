@@ -2,15 +2,12 @@
 // which includes notes, subtasks and icons.
 import completedImg from "../assets/completed.svg";
 import notCompletedImg from "../assets/not-completed.svg";
-import { save } from "../Dashboard/ProjectSaver";
 import PlusSvgBlack from "../assets/plus-black.svg";
-import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import {createSubtask, removeSubtask,
     toggleCompletedStatus, renameSubtask } from "./SubtaskManager";
-import { add } from "date-fns";
-import { unsetCurrentTask } from "../MainContent/TaskManager";
-import { format, parseISO, isValid } from "date-fns";
+import { saveTaskNotes } from "../MainContent/TaskManager";
+import { format, parseISO } from "date-fns";
 
 
 function renderCurrentTask() {
@@ -75,8 +72,7 @@ function renderTaskDetails(currentTask) {
 
 function setupTextArea(currentTask, notesText) {
     notesText.addEventListener("input", () => {
-        currentTask.notes = notesText.value;
-        save(projectList);
+        saveTaskNotes(currentTask, notesText);
     });
 }
 
@@ -123,7 +119,7 @@ function renderCompletedIcon(subtaskTab, subtaskId) {
 
 function setupCompletedIcon(completedIcon, subtaskId) {
     const subtask = projectList.currentProject.currentTask.getSubtaskById(subtaskId);
-    completedIcon.addEventListener("click", event => {
+    completedIcon.addEventListener("click", () => {
         toggleCompletedStatus(subtaskId);
         
         if (subtask.isCompleted) {

@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"cSpell.ignoreWords": [
+			"Gameboard",
+			"Skynet",
+			"contenteditable"
+		]
+	}
+}

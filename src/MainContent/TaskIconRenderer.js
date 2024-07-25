@@ -6,10 +6,9 @@ import completedImg from "../assets/completed.svg";
 import notCompletedImg from "../assets/not-completed.svg";
 import calendarImg from "../assets/calendar-black.svg";
 import { projectList } from "../Dashboard/ProjectManager";
-import { createTask, removeTask, toggleCompletedStatus, toggleImportantStatus,
+import { removeTask, toggleCompletedStatus, toggleImportantStatus,
         setTaskDueDate } from "./TaskManager";
 import { renderTasks } from "./TaskRenderer";
-import { save } from "../Dashboard/ProjectSaver";
 
 
 export function renderTaskIcons(taskCard) {
@@ -38,9 +37,9 @@ function renderCompletedIcon(iconsContainer, taskId) {
 
 function setupCompletedIcon(completedIcon, taskId) {
     const task = projectList.currentProject.getTaskById(taskId);
-    completedIcon.addEventListener("click", event => {
+    completedIcon.addEventListener("click", () => {
         toggleCompletedStatus(taskId);
-        removeTask(taskId, projectList.currentProject.id);
+        removeTask(taskId);
         
         if (task.isCompleted) {
             // addToCompleted();
@@ -75,7 +74,7 @@ function renderImportantIcon(iconsContainer, taskId) {
 }
 
 function setupImportantIcon(importantIcon, taskId) {
-    importantIcon.addEventListener("click", event => {
+    importantIcon.addEventListener("click", () => {
         const task = projectList.currentProject.getTaskById(taskId);
         toggleImportantStatus(taskId);
 
@@ -110,7 +109,7 @@ function renderDueDateIcon(iconsContainer) {
 }
 
 function setupDueDateIcon(dateIcon, dateInput) {
-    dateIcon.addEventListener("click", event => {
+    dateIcon.addEventListener("click", () => {
         const taskId = parseInt(dateIcon.parentElement.parentElement.dataset.taskId, 10);
         dateInput.style.display = 'block';
         dateInput.focus();
@@ -133,5 +132,5 @@ function setupDueDateIcon(dateIcon, dateInput) {
                 handleDateInput();
             }
         });
-    });    
+    })
 }

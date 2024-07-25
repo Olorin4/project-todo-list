@@ -1,6 +1,5 @@
 // ProjectSaver.js stores the projectList and Project objects to local storage.
 import { ProjectList, Project, Task, Subtask } from "../Objects";
-import { projectList } from "./ProjectManager";
 
 
 export function save(projectList) {
@@ -25,7 +24,7 @@ export function save(projectList) {
             }))
         }))
     }
-    localStorage.setItem('projectList', JSON.stringify(projectList));
+    localStorage.setItem('projectList', JSON.stringify(serializedProjectList));
 }
 
 

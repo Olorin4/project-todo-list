@@ -1,8 +1,7 @@
-// TaskTaskRenderer.js handles UI logic of the TaskCard,
+// TaskRenderer.js handles UI logic of the TaskCard,
 // which includes several icons and html elements.
-import { Project, Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
-import { setCurrentTask, createTask, removeTask } from "./TaskManager";
+import { setCurrentTask, createTask } from "./TaskManager";
 import { renderTaskIcons } from './TaskIconRenderer';
 import { renderCurrentTask } from "../SideBar/SidebarRenderer";
     

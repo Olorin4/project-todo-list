@@ -1,7 +1,6 @@
 // ProjectRenderer.js handles DOM manipulation of the Projects menu item.
 import deleteSVG from "../assets/delete.svg";
-import { Project } from "../Objects";
-import { renderCurrentProject, renderTasks } from "../MainContent/TaskRenderer";
+import { renderCurrentProject } from "../MainContent/TaskRenderer";
 import { projectList, setCurrentProject, createProject,
     deleteProject, renameProject } from "./ProjectManager";
 
@@ -38,7 +37,8 @@ function renderProjects() {
 
 
 function setupAddProjectButton() {
-    const addBtn = document.querySelector(".add-project").addEventListener("click", () => {
+    const addBtn = document.querySelector(".add-project");
+    addBtn.addEventListener("click", () => {
         const newProjectId = projectList.projectCount + 1;
         createProject(newProjectId, `Project ${newProjectId}`);
         renderProjects();

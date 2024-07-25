@@ -1,6 +1,6 @@
 // TaskManager.js handles all task logic: creating, removing, renaming
 // and altering properties of tasks.
-import { Project, Task } from "../Objects";
+import { Task } from "../Objects";
 import { projectList } from "../Dashboard/ProjectManager";
 import { save } from "../Dashboard/ProjectSaver";
 
@@ -12,10 +12,8 @@ function setCurrentTask(id) {
     if (!taskToSetAsCurrent) {
         console.error(`Task with ID ${id} not found.`);
         return;
-    }
-    if (taskToSetAsCurrent.isCurrent) {
-        return;
-    }
+    } else if (taskToSetAsCurrent.isCurrent) { return }
+    
     unsetCurrentTask();
     taskToSetAsCurrent.isCurrent = true;
     save(projectList);
@@ -40,7 +38,7 @@ function createTask(id, title) {
 }
 
 
-function removeTask(taskId, projectId) {
+function removeTask(taskId) {
     const currentProject = projectList.currentProject;
     currentProject.removeTask(taskId);
     save(projectList);
@@ -82,10 +80,11 @@ function setTaskDueDate(id, dueDate) {
 }
 
 
-function saveTaskNotes(currentTask) {
-    
+function saveTaskNotes(currentTask, notesText) {
+    currentTask.notes = notesText.value;
+        save(projectList);
 }
 
 
 export { setCurrentTask, unsetCurrentTask, createTask, removeTask,
-    toggleCompletedStatus, toggleImportantStatus, setTaskDueDate };
+    toggleCompletedStatus, toggleImportantStatus, setTaskDueDate, saveTaskNotes };
