@@ -94,33 +94,13 @@ h3 {
 
 .project {
     display: grid;
-    grid-template-columns: 40px 15px 120px;
+    grid-template-columns: 45px 95px 15px;
     grid-template-rows: 25px;
     background-color: #1A92D3;
 }
 
-.delete-project {
-    grid-column: 2;
-    grid-row: 1;
-    height: 20px;
-    margin-top: 4px;
-    cursor: pointer;
-    background-color: #1A92D3;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.1;
-}
-
-.delete-project:hover {
-    background-color: #1f88c1;
-    opacity: 1;
-}
-
 .project-title {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
     width: 95%;
     background-color: #1A92D3;
@@ -138,4 +118,17 @@ h3 {
     background-color: #1f88c1;
     border-radius: 5px;
     cursor: auto;
+}
+
+.dropdown {
+    grid-column: 3;
+    grid-row: 1;
+    height: 20px;
+    margin-top: 4px;
+    background-color: #1A92D3;
+    opacity: 0;
+}
+
+.dropdown:hover {
+    opacity: 1;
 }

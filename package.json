@@ -30,6 +30,7 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
+    "component-dropdown-menu": "^2.0.0",
     "date-fns": "^3.6.0"
   }
 }
